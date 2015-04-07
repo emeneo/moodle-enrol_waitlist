@@ -68,13 +68,15 @@ class enrol_waitlist_enrol_form extends moodleform {
 
 			$enroledCount = $DB->count_records('user_enrolments', array('enrolid'=>$instance->id));
 			$lineCount = $DB->count_records('user_enrol_waitlist', array('instanceid'=>$instance->id));
-			if($instance->customint3>0&&$enroledCount<$instance->customint3){
-				$mform->addElement('html', get_string('confirmation', 'enrol_waitlist'));
-			}else{
-				$mform->addElement('html', get_string('confirmationfull', 'enrol_waitlist'));
-				$mform->addElement('html', get_string('lineinfo', 'enrol_waitlist').$lineCount."<br>");
-				$mform->addElement('html', get_string('lineconfirm', 'enrol_waitlist'));
-			}
+            if($instance->customint3==0){
+                $mform->addElement('html', get_string('confirmation', 'enrol_waitlist'));
+            }elseif($enroledCount<$instance->customint3){
+                $mform->addElement('html', get_string('confirmation', 'enrol_waitlist'));
+            }else{
+                $mform->addElement('html', get_string('confirmationfull', 'enrol_waitlist'));
+                $mform->addElement('html', get_string('lineinfo', 'enrol_waitlist').$lineCount."<br>");
+                $mform->addElement('html', get_string('lineconfirm', 'enrol_waitlist'));
+            }
 			//$this->add_action_buttons(false, get_string('confirmation_yes', 'enrol_waitlist'));
 			$mform->addElement("html","<br/><p align='center'><input type='submit' value='".get_string('confirmation_yes', 'enrol_waitlist')."' onclick='../../'>&nbsp;&nbsp;<input type='button' value='".get_string('confirmation_cancel', 'enrol_waitlist')."' onclick='window.history.go(-1)'></p>");
 		}
