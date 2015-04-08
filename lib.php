@@ -264,14 +264,16 @@ class enrol_waitlist_plugin extends enrol_plugin {
 				$enroledCount = $DB->count_records('user_enrolments', array('enrolid'=>$instance->id));
 
 				$canEnrol = false;
-				if($enroledCount<$instance->customint3){
-					$canEnrol = true;
-					if($instance->enrolenddate){
-						if(time()>$instance->enrolenddate){
-							$canEnrol = false;
-						}
-					}
-				}
+                if($instance->customint3 == 0){
+                    $canEnrol = true;
+                }elseif($enroledCount<$instance->customint3){
+                    $canEnrol = true;
+                    if($instance->enrolenddate){
+                        if(time()>$instance->enrolenddate){
+                            $canEnrol = false;
+                        }
+                    }
+                }
 
 				if($canEnrol){
 					$this->enrol_user($instance, $USER->id, $instance->roleid, $timestart, $timeend);
