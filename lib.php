@@ -466,6 +466,17 @@ public function can_hide_show_instance($instance) {
     $context = context_course::instance($instance->courseid);
     return has_capability('enrol/waitlist:config', $context);
 }
+
+/**
+ * Is it possible to delete enrol instance via standard UI?
+ *
+ * @param stdClass $instance
+ * @return bool
+ */
+public function can_delete_instance($instance) {
+    $context = context_course::instance($instance->courseid);
+    return has_capability('enrol/waitlist:config', $context);
+}
 	
 	//cron process waitlist - 2012-11-01
 	public function process_wait_list(){
