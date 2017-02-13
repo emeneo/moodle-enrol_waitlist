@@ -11,8 +11,9 @@
 */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2015110501;
-$plugin->requires = 2011033005;
+$plugin->version  = 2016122400;   // The current module version (Date: YYYYMMDDXX)
+$plugin->requires = 2011033005;   // Requires at least this Moodle version
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'Course Enrol Waitlist Plugin Version 1.1(build 2013072601)';
+$plugin->release = 'Course Enrol Waitlist Plugin Version 3.1a';
+$plugin->component = 'enrol_waitlist'; // Full name of the plugin (used for diagnostics)
 $plugin->cron = 180;

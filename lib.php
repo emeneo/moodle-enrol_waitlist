@@ -284,7 +284,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
 				}else{
 					$waitlist->add_wait_list($instance->id, $USER->id, $instance->roleid, $timestart, $timeend);
 				}
-                add_to_log($instance->courseid, 'course', 'enrol', '../enrol/users.php?id='.$instance->courseid, $instance->courseid); //there should be userid somewhere!
+                //add_to_log($instance->courseid, 'course', 'enrol', '../enrol/users.php?id='.$instance->courseid, $instance->courseid); //there should be userid somewhere!
 
                 if ($instance->password and $instance->customint1 and $data->enrolpassword !== $instance->password) {
                     // it must be a group enrolment, let's assign group too
@@ -373,7 +373,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
         $rusers = array();
         if (!empty($CFG->coursecontact)) {
             $croles = explode(',', $CFG->coursecontact);
-            $rusers = get_role_users($croles, $context, true, '', 'r.sortorder ASC, u.lastname ASC');
+            $rusers = get_role_users($croles[0], $context, true, '', 'r.sortorder ASC, u.lastname ASC');
         }
         if ($rusers) {
             $contact = reset($rusers);
