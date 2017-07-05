@@ -75,4 +75,8 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configcheckbox('enrol_waitlist/sendcoursewelcomemessage',
         get_string('sendcoursewelcomemessage', 'enrol_waitlist'), get_string('sendcoursewelcomemessage_help', 'enrol_waitlist'), 1));
+
+    //$settings->add(new admin_externalpage('local_course_fields','Waitlist enrolment custom fields',new moodle_url('/enrol/waitlist/profile/index.php')));
 }
+
+$ADMIN->add('enrolments', new admin_externalpage('enrol_waitlist', 'Waitlist enrolment custom fields', $CFG->wwwroot.'/enrol/waitlist/profile/index.php'));

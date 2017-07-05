@@ -86,3 +86,11 @@ $string['users_on_waitlist'] = 'Users on waitlist';
 $string['waitlisted_users'] = 'Waitlisted users';
 
 $string['faculty'] = 'Faculty';
+
+$string['profilecreatefield'] = 'Create a new waitlist fieled';
+$string['profiledescription2'] = 'Description2 of the field';
+
+$string['manage::define'] = "Define";
+$string['manage::assign'] = "Assign";
+$string['nocursefields'] = "No fields";
+$string['profilefield'] = "Field";

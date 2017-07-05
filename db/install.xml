@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <XMLDB PATH="enrol/waitlist/db" VERSION="20121105" COMMENT="XMLDB file for Moodle enrol/waitlist" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
-    <TABLE NAME="user_enrol_waitlist" COMMENT="Main information about enrol_waitlist">
+      <TABLE NAME="user_enrol_waitlist" COMMENT="Main information about enrol_waitlist" NEXT="waitlist_info_field">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="userid"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="instanceid"/>
@@ -10,6 +10,42 @@
         <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="roleid" NEXT="timeend"/>
         <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timestart" NEXT="timecreated"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timeend"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  
+    <TABLE NAME="waitlist_info_field" COMMENT="" NEXT="waitlist_info_data">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="shortname"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="shortname" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="text" LENGTH="0" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="shortname" NEXT="datatype"/>
+        <FIELD NAME="datatype" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="null" UNSIGNED="true" SEQUENCE="false" PREVIOUS="name" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="datatype" NEXT="descriptionformat"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" PREVIOUS="description" NEXT="sortorder"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" PREVIOUS="descriptionformat" NEXT="required"/>
+        <FIELD NAME="required" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" PREVIOUS="sortorder" NEXT="forceunique"/>
+        <FIELD NAME="forceunique" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" PREVIOUS="required" NEXT="defaultdata"/>
+        <FIELD NAME="defaultdata" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="forceunique" NEXT="defaultdataformat"/>
+        <FIELD NAME="defaultdataformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" PREVIOUS="defaultdata" NEXT="param1"/>
+        <FIELD NAME="param1" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="defaultdataformat" NEXT="param2"/>
+        <FIELD NAME="param2" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="param1" NEXT="param3"/>
+        <FIELD NAME="param3" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="param2" NEXT="param4"/>
+        <FIELD NAME="param4" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="param3" NEXT="param5"/>
+        <FIELD NAME="param5" TYPE="text" LENGTH="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="param4"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="waitlist_info_data" COMMENT="" PREVIOUS="waitlist_info_field">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="course_id"/>
+        <FIELD NAME="course_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="fieldid"/>
+        <FIELD NAME="fieldid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="course_id" NEXT="data"/>
+        <FIELD NAME="data" TYPE="text" LENGTH="0" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="fieldid" NEXT="dataformat"/>
+        <FIELD NAME="dataformat" TYPE="int" LENGTH="2" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="data"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

@@ -1,0 +1,246 @@
+[03-Mar-2016 11:39:40 Africa/Abidjan] PHP Warning:  Creating default object from empty value in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 471
+[03-Mar-2016 11:42:11 Africa/Abidjan] PHP Warning:  Creating default object from empty value in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 471
+[03-Mar-2016 11:55:10 Africa/Abidjan] PHP Warning:  Creating default object from empty value in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 471
+[04-Mar-2016 05:21:46 Africa/Abidjan] PHP Notice:  Trying to get property of non-object in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 485
+[04-Mar-2016 05:22:25 Africa/Abidjan] PHP Warning:  Creating default object from empty value in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 463
+[04-Mar-2016 05:23:19 Africa/Abidjan] PHP Notice:  Trying to get property of non-object in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 486
+[04-Mar-2016 05:24:48 Africa/Abidjan] PHP Warning:  Creating default object from empty value in /home/emeneo/public_html/relaxtest24/local/course_fields/profile/definelib.php on line 472
+[28-Dec-2016 04:50:10 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 06:21:11 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 06:25:21 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 06:49:04 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 07:04:34 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 07:09:30 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 07:09:31 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 08:09:12 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 08:20:51 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_definition_after_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:392) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 466
+[28-Dec-2016 08:29:17 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_validation() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:407) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 487
+[28-Dec-2016 08:29:46 Africa/Abidjan] PHP Parse error:  syntax error, unexpected end of file in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php on line 265
+[28-Dec-2016 08:29:58 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_save_data() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:422) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 504
+[28-Dec-2016 08:30:29 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_signup_fields() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:459) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 559
+[28-Dec-2016 08:30:48 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_signup_fields() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:459) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 559
+[28-Dec-2016 08:30:50 Africa/Abidjan] PHP Fatal error:  Cannot redeclare profile_signup_fields() (previously declared in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/lib.php:459) in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 559
+[28-Dec-2016 08:31:02 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_ALL already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 25
+[28-Dec-2016 08:31:02 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_PRIVATE already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 26
+[28-Dec-2016 08:31:02 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_NONE already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 27
+[28-Dec-2016 08:31:16 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_ALL already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 25
+[28-Dec-2016 08:31:16 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_PRIVATE already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 26
+[28-Dec-2016 08:31:16 Africa/Abidjan] PHP Notice:  Constant PROFILE_VISIBLE_NONE already defined in /home/emeneo/public_html/relaxtest247/user/profile/lib.php on line 27
+[28-Dec-2016 08:31:17 Africa/Abidjan] PHP Fatal error:  Cannot redeclare class assign_form in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/assign_form.php on line 23
+[28-Dec-2016 08:34:18 Africa/Abidjan] PHP Fatal error:  Cannot redeclare class assign_form in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/assign_form.php on line 23
+[28-Dec-2016 08:34:33 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[28-Dec-2016 08:34:33 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[28-Dec-2016 08:34:50 Africa/Abidjan] PHP Fatal error:  Cannot redeclare class assign_form in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/assign_form.php on line 23
+[28-Dec-2016 08:37:57 Africa/Abidjan] Default exception handler: Coding error detected, it must be fixed by a programmer: PHP catchable fatal error Debug: Argument 2 passed to assign_form::__construct() must be an instance of moodleform, none given, called in [dirroot]/local/course_fields/profile/assign.php on line 93 and defined
+Error code: codingerror
+* line 426 of /lib/setuplib.php: coding_exception thrown
+* line 109 of /mod/assign/renderable.php: call to default_error_handler()
+* line 93 of /local/course_fields/profile/assign.php: call to assign_form->__construct()
+
+[28-Dec-2016 08:45:46 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[28-Dec-2016 08:45:46 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[20-Mar-2017 09:05:02 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[20-Mar-2017 09:05:02 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/local/course_fields/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/local/course_fields/profile/index_field_form.php on line 21
+[25-Apr-2017 06:42:02 Africa/Abidjan] PHP Fatal error:  Class 'waitlist_fields_profile_define_checkbox' not found in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 23
+[25-Apr-2017 06:42:26 Africa/Abidjan] PHP Fatal error:  Class 'waitlist_fields_profile_define_checkbox' not found in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 23
+[25-Apr-2017 06:44:43 Africa/Abidjan] Default exception handler: Error reading from database Debug: Table 'emeneo_relaxtest247.mdl_waitlist_info_field' doesn't exist
+SELECT * FROM mdl_waitlist_info_field   ORDER BY sortorder ASC
+[array (
+)]
+Error code: dmlreadexception
+* line 474 of /lib/dml/moodle_database.php: dml_read_exception thrown
+* line 1088 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1356 of /lib/dml/moodle_database.php: call to mysqli_native_moodle_database->get_records_sql()
+* line 1307 of /lib/dml/moodle_database.php: call to moodle_database->get_records_select()
+* line 91 of /enrol/waitlist/profile/index.php: call to moodle_database->get_records()
+
+[27-Apr-2017 05:41:47 Africa/Abidjan] Default exception handler: Section error! Debug: 
+Error code: sectionerror
+* line 496 of /lib/setuplib.php: moodle_exception thrown
+* line 7175 of /lib/adminlib.php: call to print_error()
+* line 8 of /enrol/waitlist/profile/index.php: call to admin_externalpage_setup()
+
+[27-Apr-2017 05:45:01 Africa/Abidjan] Default exception handler: Section error! Debug: 
+Error code: sectionerror
+* line 496 of /lib/setuplib.php: moodle_exception thrown
+* line 7175 of /lib/adminlib.php: call to print_error()
+* line 8 of /enrol/waitlist/profile/index.php: call to admin_externalpage_setup()
+
+[27-Apr-2017 05:45:38 Africa/Abidjan] Default exception handler: Section error! Debug: 
+Error code: sectionerror
+* line 496 of /lib/setuplib.php: moodle_exception thrown
+* line 7175 of /lib/adminlib.php: call to print_error()
+* line 8 of /enrol/waitlist/profile/index.php: call to admin_externalpage_setup()
+
+[27-Apr-2017 05:52:20 Africa/Abidjan] Default exception handler: Section error! Debug: 
+Error code: sectionerror
+* line 496 of /lib/setuplib.php: moodle_exception thrown
+* line 7175 of /lib/adminlib.php: call to print_error()
+* line 8 of /enrol/waitlist/profile/index.php: call to admin_externalpage_setup()
+
+[27-Apr-2017 05:52:23 Africa/Abidjan] Default exception handler: Section error! Debug: 
+Error code: sectionerror
+* line 496 of /lib/setuplib.php: moodle_exception thrown
+* line 7175 of /lib/adminlib.php: call to print_error()
+* line 8 of /enrol/waitlist/profile/index.php: call to admin_externalpage_setup()
+
+[27-Apr-2017 06:35:13 Africa/Abidjan] PHP Notice:  Undefined property: stdClass::$categoryid in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/definelib.php on line 159
+[27-Apr-2017 06:37:36 Africa/Abidjan] PHP Notice:  Undefined property: stdClass::$categoryid in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index.php on line 195
+[27-Apr-2017 07:28:17 Africa/Abidjan] PHP Fatal error:  Class 'waitlist_fields_profile_define_base' not found in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field/checkbox/define.class.php on line 3
+[27-Apr-2017 07:42:38 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field/textarea/define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[27-Apr-2017 07:42:38 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field/textarea/define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[27-Apr-2017 08:33:51 Africa/Abidjan] PHP Notice:  Undefined property: stdClass::$defaultdata in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/definelib.php on line 586
+[27-Apr-2017 08:34:45 Africa/Abidjan] PHP Notice:  Undefined property: stdClass::$defaultdata in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/definelib.php on line 586
+[27-Apr-2017 08:36:55 Africa/Abidjan] PHP Fatal error:  Class 'waitlist_fields_profile_define_textarea' not found in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 23
+[04-May-2017 07:52:28 Africa/Abidjan] Default exception handler: Coding error detected, it must be fixed by a programmer: PHP catchable fatal error Debug: Argument 2 passed to moodle_database::get_records() must be of the type array, string given, called in [dirroot]/enrol/waitlist/profile/definelib.php on line 207 and defined
+Error code: codingerror
+* line 426 of /lib/setuplib.php: coding_exception thrown
+* line 1305 of /lib/dml/moodle_database.php: call to default_error_handler()
+* line 207 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_records()
+* line 344 of /enrol/waitlist/profile/definelib.php: call to profile_reorder_fields()
+* line 57 of /enrol/waitlist/profile/index.php: call to profile_move_field()
+
+[04-May-2017 07:53:51 Africa/Abidjan] Default exception handler: Coding error detected, it must be fixed by a programmer: moodle_database::update_record_raw() id field must be specified. Debug: 
+Error code: codingerror
+* line 1376 of /lib/dml/mysqli_native_moodle_database.php: coding_exception thrown
+* line 1432 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->update_record_raw()
+* line 340 of /enrol/waitlist/profile/definelib.php: call to mysqli_native_moodle_database->update_record()
+* line 57 of /enrol/waitlist/profile/index.php: call to profile_move_field()
+
+[04-May-2017 07:56:05 Africa/Abidjan] Default exception handler: Coding error detected, it must be fixed by a programmer: moodle_database::update_record_raw() id field must be specified. Debug: 
+Error code: codingerror
+* line 1376 of /lib/dml/mysqli_native_moodle_database.php: coding_exception thrown
+* line 1432 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->update_record_raw()
+* line 340 of /enrol/waitlist/profile/definelib.php: call to mysqli_native_moodle_database->update_record()
+* line 57 of /enrol/waitlist/profile/index.php: call to profile_move_field()
+
+[04-May-2017 07:57:59 Africa/Abidjan] Default exception handler: Coding error detected, it must be fixed by a programmer: moodle_database::update_record_raw() id field must be specified. Debug: 
+Error code: codingerror
+* line 1376 of /lib/dml/mysqli_native_moodle_database.php: coding_exception thrown
+* line 1432 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->update_record_raw()
+* line 340 of /enrol/waitlist/profile/definelib.php: call to mysqli_native_moodle_database->update_record()
+* line 57 of /enrol/waitlist/profile/index.php: call to profile_move_field()
+
+[05-May-2017 06:02:38 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:02:38 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:02:45 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:02:45 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:02:49 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:02:49 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:03:06 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:03:06 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:03:15 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[05-May-2017 06:03:15 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[10-May-2017 03:19:16 Africa/Abidjan] PHP Warning:  mysqli::real_escape_string() expects parameter 1 to be string, array given in /home/emeneo/public_html/relaxtest247/lib/dml/mysqli_native_moodle_database.php on line 955
+[10-May-2017 11:39:47 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[10-May-2017 11:39:47 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[11-May-2017 14:12:16 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[11-May-2017 14:13:40 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[12-May-2017 06:36:59 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[12-May-2017 06:38:19 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[16-May-2017 11:09:50 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[17-May-2017 06:54:16 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[17-May-2017 07:15:00 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to course_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to course_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[17-May-2017 07:17:38 Africa/Abidjan] Default exception handler: Table "course_info_field" does not exist Debug: 
+Error code: ddltablenotexist
+* line 621 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1477 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 110 of /enrol/waitlist/profile/definelib.php: call to moodle_database->get_record()
+* line 86 of /enrol/waitlist/profile/definelib.php: call to waitlist_fields_profile_define_base->define_validate_common()
+* line 50 of /enrol/waitlist/profile/index_field_form.php: call to waitlist_fields_profile_define_base->define_validate()
+* line 573 of /lib/formslib.php: call to field_form->validation()
+* line 523 of /lib/formslib.php: call to moodleform->validate_defined_fields()
+* line 619 of /lib/formslib.php: call to moodleform->is_validated()
+* line 578 of /enrol/waitlist/profile/definelib.php: call to moodleform->get_data()
+* line 38 of /enrol/waitlist/profile/index.php: call to profile_edit_field()
+
+[13-Jun-2017 07:28:22 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[13-Jun-2017 07:28:22 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[13-Jun-2017 07:29:07 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[13-Jun-2017 07:29:07 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[13-Jun-2017 07:30:19 Africa/Abidjan] PHP Warning:  require_once(/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php): failed to open stream: No such file or directory in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
+[13-Jun-2017 07:30:19 Africa/Abidjan] PHP Fatal error:  require_once(): Failed opening required '/home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/field//define.class.php' (include_path='/home/emeneo/public_html/relaxtest247/lib/pear:.:/usr/local/php56/pear') in /home/emeneo/public_html/relaxtest247/enrol/waitlist/profile/index_field_form.php on line 21
