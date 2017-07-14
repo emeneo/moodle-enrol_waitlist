@@ -170,6 +170,8 @@ if ($mform->is_cancelled()) {
             $fieldData->data = $v;
             $DB->insert_record('waitlist_info_data', $fieldData);
         }
+    }else{
+        $DB->delete_records('waitlist_info_data', array('course_id'=>$courseid));
     }
 
     redirect($return);
