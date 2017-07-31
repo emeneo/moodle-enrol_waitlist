@@ -59,7 +59,7 @@ $string['passwordinvalid'] = 'Falscher Einschreibeschlüssel. Bitte versuchen Si
 $string['passwordinvalidhint'] = 'Falscher Einschreibeschlüssel 
 <br />
 (Hinweis: Das erste Zeichen ist  \'{$a}\')';
-$string['pluginname'] = 'Selbsteinschreibung';
+$string['pluginname'] = 'Selbsteinschreibung mit Warteliste';
 $string['pluginname_desc'] = 'Das Plugin Selbsteinschreibung erlaubt Nutzer/innen zu wählen, in welchen
 Kursen sie teilnehmen möchten. Die Kurse können mit einem
 Einschreibeschlüssel gesichert sein. Intern wird die Selbsteinschreibung
