@@ -11,7 +11,7 @@
 */
 $string['customwelcomemessage'] = 'Begrüßungstext';
 $string['defaultrole'] = 'Rolle im Kurs';
-$string['defaultrole_desc'] = 'Wählen Sie eine Rolle aus, die Nutzer/innen bei der Selbsteinschreibung
+$string['defaultrole_desc'] = 'Wählen Sie eine Rolle aus, die Nutzer/innen bei der Selbsteinschre
 zugewiesen werden soll';
 $string['enrolenddate'] = 'Einschreibeschluss';
 $string['enrolenddate_help'] = 'Wenn diese Option aktiviert ist, können Nutzer/innen sich bis zum
@@ -59,7 +59,7 @@ $string['passwordinvalid'] = 'Falscher Einschreibeschlüssel. Bitte versuchen Si
 $string['passwordinvalidhint'] = 'Falscher Einschreibeschlüssel 
 <br />
 (Hinweis: Das erste Zeichen ist  \'{$a}\')';
-$string['pluginname'] = 'Selbsteinschreibung';
+$string['pluginname'] = 'Warteliste';
 $string['pluginname_desc'] = 'Das Plugin Selbsteinschreibung erlaubt Nutzer/innen zu wählen, in welchen
 Kursen sie teilnehmen möchten. Die Kurse können mit einem
 Einschreibeschlüssel gesichert sein. Intern wird die Selbsteinschreibung
