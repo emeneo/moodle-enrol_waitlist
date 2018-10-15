@@ -28,7 +28,8 @@ class course_fields_profile_field_base {
      * @param   integer   id of the profile from the user_info_field table
      * @param   integer   id of the user for whom we are displaying data
      */
-    function course_fields_profile_field_base($fieldid=0, $courseid=0) {
+ /*   function course_fields_profile_field_base($fieldid=0, $courseid=0) { */
+      function __construct($fieldid=0, $courseid=0) { 
         global $USER;
 
         $this->set_fieldid($fieldid);
