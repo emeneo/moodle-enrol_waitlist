@@ -9,7 +9,7 @@ class waitlist_fields_profile_field_checkbox extends waitlist_fields_profile_fie
      */
     function waitlist_fields_profile_field_checkbox($fieldid=0, $courseid=0) {
         global $DB;
-        //first call parent constructor
+        // first call parent constructor
         $this->waitlist_fields_profile_field_base($fieldid, $courseid);
 
         if (!empty($this->field)) {

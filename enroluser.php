@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * *************************************************************************
  * *                  Waitlist Enrol                                      **
@@ -8,7 +22,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later  **
  * *************************************************************************
  * ************************************************************************
-*/
+ */
 require('../../config.php');
 require_once($CFG->dirroot.'/enrol/waitlist/selectlib.php');
 
@@ -17,21 +31,21 @@ $roleid       = optional_param('roleid', -1, PARAM_INT);
 $extendperiod = optional_param('extendperiod', 0, PARAM_INT);
 $extendbase   = optional_param('extendbase', 3, PARAM_INT);
 
-$instance = $DB->get_record('enrol', array('id'=>$enrolid, 'enrol'=>'waitlist'), '*', MUST_EXIST);
-$course = $DB->get_record('course', array('id'=>$instance->courseid), '*', MUST_EXIST);
-//$context = get_context_instance(CONTEXT_COURSE, $course->id, MUST_EXIST);
+$instance = $DB->get_record('enrol', array('id' => $enrolid, 'enrol' => 'waitlist'), '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $instance->courseid), '*', MUST_EXIST);
+// $context = get_context_instance(CONTEXT_COURSE, $course->id, MUST_EXIST);
 $context = context_course::instance($course->id);
 
 require_login($course);
-//require_capability('enrol/manual:enrol', $context);
-//require_capability('enrol/manual:manage', $context);
-//require_capability('enrol/manual:unenrol', $context);
+// require_capability('enrol/manual:enrol', $context);
+// require_capability('enrol/manual:manage', $context);
+// require_capability('enrol/manual:unenrol', $context);
 
 if ($roleid < 0) {
     $roleid = $instance->roleid;
 }
 $roles = get_assignable_roles($context);
-$roles = array('0'=>get_string('none')) + $roles;
+$roles = array('0' => get_string('none')) + $roles;
 
 if (!isset($roles[$roleid])) {
     // weird - security always first!
@@ -44,11 +58,11 @@ if (!$enrol_manual = enrol_get_plugin('waitlist')) {
 
 $instancename = $enrol_manual->get_instance_name($instance);
 
-$PAGE->set_url('/enrol/waitlist/enroluser.php', array('enrolid'=>$instance->id));
+$PAGE->set_url('/enrol/waitlist/enroluser.php', array('enrolid' => $instance->id));
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($enrol_manual->get_instance_name($instance));
 $PAGE->set_heading($course->fullname);
-navigation_node::override_active_url(new moodle_url('/enrol/users.php', array('id'=>$course->id)));
+navigation_node::override_active_url(new moodle_url('/enrol/users.php', array('id' => $course->id)));
 
 // Create the user selector objects.
 $options = array('enrolid' => $enrolid);
@@ -59,7 +73,7 @@ $currentuserselector = new enrol_apply_current_participant('removeselect', $opti
 // Build the list of options for the enrolment period dropdown.
 $unlimitedperiod = get_string('unlimited');
 $periodmenu = array();
-for ($i=1; $i<=365; $i++) {
+for ($i = 1; $i <= 365; $i++) {
     $seconds = $i * 86400;
     $periodmenu[$seconds] = get_string('numdays', '', $i);
 }
@@ -80,7 +94,7 @@ $basemenu = array();
 if ($course->startdate > 0) {
     $basemenu[2] = get_string('coursestart') . ' (' . userdate($course->startdate, $timeformat) . ')';
 }
-$basemenu[3] = get_string('today') . ' (' . userdate($today, $timeformat) . ')' ;
+$basemenu[3] = get_string('today') . ' (' . userdate($today, $timeformat) . ')';
 
 // process add and removes
 if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
@@ -102,15 +116,15 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
             } else {
                 $timeend = $timestart + $extendperiod;
             }
-            //echo "<pre>";print_r($instance);exit();
+            // echo "<pre>";print_r($instance);exit();
             $enrol_manual->enrol_user($instance, $adduser->id, $roleid, $timestart, $timeend);
-            //add_to_log($course->id, 'course', 'enrol', '../enrol/users.php?id='.$course->id, $course->id); //there should be userid somewhere!
+            // add_to_log($course->id, 'course', 'enrol', '../enrol/users.php?id='.$course->id, $course->id); //there should be userid somewhere!
         }
 
         $potentialuserselector->invalidate_selected_users();
         $currentuserselector->invalidate_selected_users();
 
-        //TODO: log
+        // TODO: log
     }
 }
 
@@ -120,13 +134,13 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstounassign)) {
         foreach($userstounassign as $removeuser) {
             $enrol_manual->unenrol_user($instance, $removeuser->id);
-            add_to_log($course->id, 'course', 'unenrol', '../enrol/users.php?id='.$course->id, $course->id); //there should be userid somewhere!
+            add_to_log($course->id, 'course', 'unenrol', '../enrol/users.php?id='.$course->id, $course->id); // there should be userid somewhere!
         }
 
         $potentialuserselector->invalidate_selected_users();
         $currentuserselector->invalidate_selected_users();
 
-        //TODO: log
+        // TODO: log
     }
 }
 
@@ -142,7 +156,7 @@ echo $OUTPUT->heading($instancename);
     <tr>
       <td id="existingcell">
           <p><label for="removeselect"><?php print_string('enrolledusers', 'enrol'); ?></label></p>
-          <?php $currentuserselector->display() ?>
+            <?php $currentuserselector->display() ?>
       </td>
       <td id="buttonscell">
           <div id="addcontrols">
@@ -151,13 +165,13 @@ echo $OUTPUT->heading($instancename);
               <div class="enroloptions">
 
               <p><label for="roleid"><?php print_string('assignrole', 'enrol_manual') ?></label><br />
-              <?php echo html_writer::select($roles, 'roleid', $roleid, false); ?></p>
+                <?php echo html_writer::select($roles, 'roleid', $roleid, false); ?></p>
 
               <p><label for="extendperiod"><?php print_string('enrolperiod', 'enrol') ?></label><br />
-              <?php echo html_writer::select($periodmenu, 'extendperiod', $defaultperiod, $unlimitedperiod); ?></p>
+                <?php echo html_writer::select($periodmenu, 'extendperiod', $defaultperiod, $unlimitedperiod); ?></p>
 
               <p><label for="extendbase"><?php print_string('startingfrom') ?></label><br />
-              <?php echo html_writer::select($basemenu, 'extendbase', $extendbase, false); ?></p>
+                <?php echo html_writer::select($basemenu, 'extendbase', $extendbase, false); ?></p>
 
               </div>
           </div>
@@ -168,7 +182,7 @@ echo $OUTPUT->heading($instancename);
       </td>
       <td id="potentialcell">
           <p><label for="addselect"><?php print_string('enrolcandidates', 'enrol'); ?></label></p>
-          <?php $potentialuserselector->display() ?>
+            <?php $potentialuserselector->display() ?>
       </td>
     </tr>
   </table>

@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 require('../../config.php');
 require_once("$CFG->dirroot/enrol/waitlist/library.php");
 require_once("$CFG->dirroot/enrol/waitlist/users_forms.php");
@@ -82,7 +97,7 @@ if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
     redirect('users.php?id=' . $id);
 }
 
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 $context = context_course::instance($course->id);
 
 $res = $DB->get_record_sql("select id from ".$CFG->prefix."enrol where courseid=".$id." and enrol='waitlist'");
@@ -93,12 +108,12 @@ if ($course->id == SITEID) {
 }
 
 require_login($course);
-//require_capability('moodle/course:enrolreview', $context);
+// require_capability('moodle/course:enrolreview', $context);
 $PAGE->set_pagelayout('admin');
 
 $manager = new course_enrolment_manager($PAGE, $course, $filter, $role, $search, $fgroup, $status);
 $table = new course_enrolment_users_table($manager, $PAGE);
-$PAGE->set_url('/enrol/waitlist/users.php', $manager->get_url_params()+$table->get_url_params());
+$PAGE->set_url('/enrol/waitlist/users.php', $manager->get_url_params() + $table->get_url_params());
 navigation_node::override_active_url(new moodle_url('/enrol/waitlist/users.php', array('id' => $id)));
 
 $renderer = new waitlist_renderer($PAGE, null);
@@ -123,9 +138,9 @@ $filterform->set_data(array('search' => $search));
 
 $table->set_fields($fields, $renderer);
 
-//$canassign = has_capability('moodle/role:assign', $manager->get_context());
+// $canassign = has_capability('moodle/role:assign', $manager->get_context());
 $users = $manager->get_users_for_display($manager, $table->sort, $table->sortdirection, $table->page, $table->perpage, $instance);
-foreach ($users as $userid=>&$user) {
+foreach ($users as $userid => &$user) {
     $user['picture'] = $OUTPUT->render($user['picture']);
     $user['email'] = '<a href=mailto:'.$user['email'].'>'.$user['email'].'</a>';
 }

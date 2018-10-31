@@ -45,7 +45,7 @@ class enrol_apply_potential_participant extends user_selector_base {
      */
     public function find_users($search) {
         global $DB;
-        //by default wherecondition retrieves all users except the deleted, not confirmed and guest
+        // by default wherecondition retrieves all users except the deleted, not confirmed and guest
         list($wherecondition, $params) = $this->search_sql($search, 'u');
         $params['enrolid'] = $this->enrolid;
 
@@ -72,7 +72,6 @@ class enrol_apply_potential_participant extends user_selector_base {
         if (empty($availableusers)) {
             return array();
         }
-
 
         if ($search) {
             $groupname = get_string('enrolcandidatesmatching', 'enrol', $search);
@@ -110,7 +109,7 @@ class enrol_apply_current_participant extends user_selector_base {
      */
     public function find_users($search) {
         global $DB;
-        //by default wherecondition retrieves all users except the deleted, not confirmed and guest
+        // by default wherecondition retrieves all users except the deleted, not confirmed and guest
         list($wherecondition, $params) = $this->search_sql($search, 'u');
         $params['enrolid'] = $this->enrolid;
 
@@ -135,7 +134,6 @@ class enrol_apply_current_participant extends user_selector_base {
         if (empty($availableusers)) {
             return array();
         }
-
 
         if ($search) {
             $groupname = get_string('enrolledusersmatching', 'enrol', $search);

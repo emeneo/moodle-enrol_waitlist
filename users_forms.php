@@ -73,7 +73,7 @@ class enrol_users_assign_form extends moodleform {
 
         $this->add_action_buttons();
 
-        $this->set_data(array('action'=>'assign', 'user'=>$user->id));
+        $this->set_data(array('action' => 'assign', 'user' => $user->id));
     }
 }
 
@@ -127,7 +127,7 @@ class enrol_users_addmember_form extends moodleform {
 
         $this->add_action_buttons();
 
-        $this->set_data(array('action'=>'addmember', 'user'=>$user->id));
+        $this->set_data(array('action' => 'addmember', 'user' => $user->id));
     }
 }
 

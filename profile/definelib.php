@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 class waitlist_fields_profile_define_base {
 
@@ -10,11 +24,11 @@ class waitlist_fields_profile_define_base {
         $form->addElement('header', '_commonsettings', get_string('profilecommonsettings', 'admin'));
         $this->define_form_common($form);
 
-		//$form->addElement('header', '_categorysettings', get_string('profilecategorysettings', 'local_course_fields'));
-        //$this->define_form_category($form);
+        // $form->addElement('header', '_categorysettings', get_string('profilecategorysettings', 'local_course_fields'));
+        // $this->define_form_category($form);
 
-        //$form->addElement('header', '_specificsettings', get_string('profilespecificsettings', 'admin'));
-        //$this->define_form_specific($form);
+        // $form->addElement('header', '_specificsettings', get_string('profilespecificsettings', 'admin'));
+        // $this->define_form_specific($form);
     }
 
     /**
@@ -34,7 +48,7 @@ class waitlist_fields_profile_define_base {
         $form->addRule('name', $strrequired, 'required', null, 'client');
         $form->setType('name', PARAM_MULTILANG);
 
-        //$editorOptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>5, 'maxbytes'=>1024*1024);
+        // $editorOptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>5, 'maxbytes'=>1024*1024);
         $editorOptions = array();
         $form->addElement('editor', 'description', get_string('profiledescription', 'admin'), null, $editorOptions);
         $form->addElement('editor', 'param2', get_string('profiledescription2', 'enrol_waitlist'), null, $editorOptions);
@@ -42,8 +56,8 @@ class waitlist_fields_profile_define_base {
         $form->addElement('selectyesno', 'required', get_string('profilerequired', 'admin'));
 
         $form->addElement('selectyesno', 'forceunique', get_string('profileforceunique', 'admin'));
-		
-		//$form->addElement('selectyesno', 'allcategory', get_string('profileallcategory', 'local_course_fields'));
+
+        // $form->addElement('selectyesno', 'allcategory', get_string('profileallcategory', 'local_course_fields'));
 
         $choices = array();
         /*
@@ -54,21 +68,21 @@ class waitlist_fields_profile_define_base {
         $choices[0] = get_string('profilevisiblenone', 'admin');
         $choices[1] = get_string('profilevisibleprivate', 'admin');
         $choices[2] = get_string('profilevisibleall', 'admin');
-        //$form->addHelpButton('visible', 'profilevisible', 'admin');
-        //$form->setDefault('visible', PROFILE_VISIBLE_ALL);
+        // $form->addHelpButton('visible', 'profilevisible', 'admin');
+        // $form->setDefault('visible', PROFILE_VISIBLE_ALL);
         $form->setDefault('visible', 2);
-		/*
+        /*
         $choices = profile_list_categories();
         $form->addElement('select', 'categoryid', get_string('profilecategory', 'admin'), $choices);
         */
     }
 
-	function define_form_category(&$form){
-		$choices = profile_list_categories();
-		foreach($choices as $cid=>$choice){
-			$form->addElement('advcheckbox','categoryid[]',$choice,null,null,array(0,$cid));
-		}
-	}
+    function define_form_category(&$form) {
+        $choices = profile_list_categories();
+        foreach($choices as $cid => $choice){
+            $form->addElement('advcheckbox','categoryid[]',$choice,null,null,array(0,$cid));
+        }
+    }
 
     /**
      * Prints out the form snippet for the part of creating or
@@ -114,14 +128,14 @@ class waitlist_fields_profile_define_base {
             $err['shortname'] = get_string('required');
 
         } else {
-        /// Fetch field-record from DB
-            $field = $DB->get_record('waitlist_info_field', array('shortname'=>$data->shortname));
-        /// Check the shortname is unique
+            /// Fetch field-record from DB
+            $field = $DB->get_record('waitlist_info_field', array('shortname' => $data->shortname));
+            /// Check the shortname is unique
             if ($field and $field->id <> $data->id) {
                 $err['shortname'] = get_string('profileshortnamenotunique', 'admin');
             }
 
-            //NOTE: since 2.0 the shortname may collide with existing fields in $USER because we load these fields into $USER->profile array instead
+            // NOTE: since 2.0 the shortname may collide with existing fields in $USER because we load these fields into $USER->profile array instead
         }
 
         /// No further checks necessary as the form class will take care of it
@@ -160,7 +174,7 @@ class waitlist_fields_profile_define_base {
 
         $old = false;
         if (!empty($data->id)) {
-            $old = $DB->get_record('waitlist_info_field', array('id'=>(int)$data->id));
+            $old = $DB->get_record('waitlist_info_field', array('id' => (int)$data->id));
         }
 
         /// check to see if the category has changed
@@ -173,7 +187,7 @@ class waitlist_fields_profile_define_base {
         if (empty($data->id)) {
             unset($data->id);
             $fieldcount = $DB->count_records('waitlist_info_field',null);
-            $data->sortorder = ($fieldcount+1);
+            $data->sortorder = ($fieldcount + 1);
             $data->id = $DB->insert_record('waitlist_info_field', $data);
         } else {
             $DB->update_record('waitlist_info_field', $data);
@@ -223,7 +237,7 @@ function profile_reorder_fields() {
             $DB->update_record('waitlist_info_field', $f);
         }
     }
-    
+
 }
 
 /**
@@ -253,7 +267,7 @@ function profile_delete_category($id) {
     global $DB;
 
     /// Retrieve the category
-    if (!$category = $DB->get_record('course_info_category', array('id'=>$id))) {
+    if (!$category = $DB->get_record('course_info_category', array('id' => $id))) {
         print_error('invalidcategoryid');
     }
 
@@ -262,39 +276,39 @@ function profile_delete_category($id) {
     }
 
     unset($categories[$category->id]);
-	/*
+    /*
     if (!count($categories)) {
         return; //we can not delete the last category
     }
-	*/
+    */
     /// Does the category contain any fields
-    if ($DB->count_records('waitlist_info_field', array('categoryid'=>$category->id))) {
-        if (array_key_exists($category->sortorder-1, $categories)) {
-            $newcategory = $categories[$category->sortorder-1];
-        } else if (array_key_exists($category->sortorder+1, $categories)) {
-            $newcategory = $categories[$category->sortorder+1];
+    if ($DB->count_records('waitlist_info_field', array('categoryid' => $category->id))) {
+        if (array_key_exists($category->sortorder - 1, $categories)) {
+            $newcategory = $categories[$category->sortorder - 1];
+        } else if (array_key_exists($category->sortorder + 1, $categories)) {
+            $newcategory = $categories[$category->sortorder + 1];
         } else {
             $newcategory = reset($categories); // get first category if sortorder broken
         }
 
-        $sortorder = $DB->count_records('course_info_field', array('categoryid'=>$newcategory->id)) + 1;
+        $sortorder = $DB->count_records('course_info_field', array('categoryid' => $newcategory->id)) + 1;
 
-        if ($fields = $DB->get_records('course_info_field', array('categoryid'=>$category->id), 'sortorder ASC')) {
+        if ($fields = $DB->get_records('course_info_field', array('categoryid' => $category->id), 'sortorder ASC')) {
             foreach ($fields as $field) {
                 $f = new stdClass();
                 $f->id = $field->id;
                 $f->sortorder = $sortorder++;
                 $f->categoryid = $newcategory->id;
                 $DB->update_record('course_info_field', $f);
-                //echo "<pre>";var_dump($f);echo"</pre>";
+                // echo "<pre>";var_dump($f);echo"</pre>";
             }
         }
     }
 
     /// Finally we get to delete the category
-	$DB->delete_records('course_info_categories', array('categoryid'=>$category->id));
-    $DB->delete_records('course_info_category', array('id'=>$category->id));
-    //profile_reorder_categories();
+    $DB->delete_records('course_info_categories', array('categoryid' => $category->id));
+    $DB->delete_records('course_info_category', array('id' => $category->id));
+    // profile_reorder_categories();
     return true;
 }
 
@@ -303,12 +317,12 @@ function profile_delete_field($id) {
     global $DB;
 
     /// Remove any user data associated with this field
-    if (!$DB->delete_records('waitlist_info_data', array('fieldid'=>$id))) {
+    if (!$DB->delete_records('waitlist_info_data', array('fieldid' => $id))) {
         print_error('cannotdeletecustomfield');
     }
 
     /// Try to remove the record from the database
-    $res = $DB->delete_records('waitlist_info_field', array('id'=>$id));
+    $res = $DB->delete_records('waitlist_info_field', array('id' => $id));
 
     /// Reorder the remaining fields in the same category
     profile_reorder_fields();
@@ -324,7 +338,7 @@ function profile_move_field($id, $move) {
     global $DB;
 
     /// Get the field object
-    if (!$field = $DB->get_record('waitlist_info_field', array('id'=>$id), 'id, sortorder')) {
+    if (!$field = $DB->get_record('waitlist_info_field', array('id' => $id), 'id, sortorder')) {
         return false;
     }
     /// Count the number of fields in this category
@@ -333,14 +347,14 @@ function profile_move_field($id, $move) {
     /// Calculate the new sortorder
     if ( ($move == 'up') and ($field->sortorder > 1)) {
         $neworder = $field->sortorder - 1;
-    } elseif ( ($move == 'down') and ($field->sortorder < $fieldcount)) {
+    } else if ( ($move == 'down') and ($field->sortorder < $fieldcount)) {
         $neworder = $field->sortorder + 1;
     } else {
         return false;
     }
 
     /// Retrieve the field object that is currently residing in the new position
-    if ($swapfield = $DB->get_record('waitlist_info_field', array('sortorder'=>$neworder), 'id, sortorder')) {
+    if ($swapfield = $DB->get_record('waitlist_info_field', array('sortorder' => $neworder), 'id, sortorder')) {
 
         /// Swap the sortorders
         $swapfield->sortorder = $field->sortorder;
@@ -363,7 +377,7 @@ function profile_move_field($id, $move) {
 function profile_move_category($id, $move) {
     global $DB;
     /// Get the category object
-    if (!($category = $DB->get_record('user_info_category', array('id'=>$id), 'id, sortorder'))) {
+    if (!($category = $DB->get_record('user_info_category', array('id' => $id), 'id, sortorder'))) {
         return false;
     }
 
@@ -373,14 +387,14 @@ function profile_move_category($id, $move) {
     /// Calculate the new sortorder
     if ( ($move == 'up') and ($category->sortorder > 1)) {
         $neworder = $category->sortorder - 1;
-    } elseif ( ($move == 'down') and ($category->sortorder < $categorycount)) {
+    } else if ( ($move == 'down') and ($category->sortorder < $categorycount)) {
         $neworder = $category->sortorder + 1;
     } else {
         return false;
     }
 
     /// Retrieve the category object that is currently residing in the new position
-    if ($swapcategory = $DB->get_record('user_info_category', array('sortorder'=>$neworder),'id, sortorder')) {
+    if ($swapcategory = $DB->get_record('user_info_category', array('sortorder' => $neworder),'id, sortorder')) {
 
         /// Swap the sortorders
         $swapcategory->sortorder = $category->sortorder;
@@ -404,10 +418,10 @@ function profile_list_datatypes() {
     $datatypes = array();
 
     $plugins = get_plugin_list('profilefield');
-    foreach ($plugins as $type=>$unused) {
-		if($type == 'checkbox'){
-			$datatypes[$type] = get_string('pluginname', 'profilefield_'.$type);
-		}
+    foreach ($plugins as $type => $unused) {
+        if($type == 'checkbox'){
+               $datatypes[$type] = get_string('pluginname', 'profilefield_'.$type);
+        }
 
         if($type == 'text'){
             $datatypes[$type] = get_string('pluginname', 'profilefield_'.$type);
@@ -428,7 +442,7 @@ function profile_list_datatypes() {
  */
 function profile_list_categories() {
     global $DB;
-    if (!$categories = $DB->get_records_menu('course_info_category', NULL, 'sortorder ASC', 'id, name')) {
+    if (!$categories = $DB->get_records_menu('course_info_category', null, 'sortorder ASC', 'id, name')) {
         $categories = array();
     }
     return $categories;
@@ -451,47 +465,49 @@ function profile_edit_category($id, $redirect) {
     require_once('index_category_form.php');
     $categoryform = new category_form();
 
-    if ($category = $DB->get_record('course_info_category', array('id'=>$id))) {
+    if ($category = $DB->get_record('course_info_category', array('id' => $id))) {
         $categoryform->set_data($category);
     }
 
-	$usedCategoryIds = array();
-	$courseCategorys = $DB->get_records('course_info_categories', array('categoryid'=>$id));
-	foreach($courseCategorys as $courseCategory){
-		$usedCategoryIds[] = $courseCategory->course_category;
-	}
+    $usedCategoryIds = array();
+    $courseCategorys = $DB->get_records('course_info_categories', array('categoryid' => $id));
+    foreach($courseCategorys as $courseCategory){
+        $usedCategoryIds[] = $courseCategory->course_category;
+    }
 
     if ($categoryform->is_cancelled()) {
         redirect($redirect);
     } else {
         if ($data = $categoryform->get_data()) {
-			$categoryIds = array();
-			foreach($_POST['categoryid'] as $categoryid){
-				if($categoryid>0){
-					$categoryIds[] = $categoryid;
-				}
-			}
+            $categoryIds = array();
+            $postdata = data_submitted();
+            $postdata = (array)$postdata;
+            foreach($postdata['categoryid'] as $categoryid){
+                if($categoryid > 0){
+                    $categoryIds[] = $categoryid;
+                }
+            }
 
             if (empty($data->id)) {
                 unset($data->id);
                 $data->sortorder = $DB->count_records('course_info_category') + 1;
                 $cid = $DB->insert_record('course_info_category', $data);
-				if($cid){
-					foreach($categoryIds as $categoryid){
+                if($cid){
+                    foreach($categoryIds as $categoryid){
                         $cdata = new stdClass();
-						$cdata->categoryid = $cid;
-						$cdata->course_category = $categoryid;
-						$DB->insert_record('course_info_categories', $cdata);
-					}
-				}
+                        $cdata->categoryid = $cid;
+                        $cdata->course_category = $categoryid;
+                        $DB->insert_record('course_info_categories', $cdata);
+                    }
+                }
             } else {
-				$DB->delete_records('course_info_categories', array('categoryid'=>$id));
-				foreach($categoryIds as $categoryid){
+                $DB->delete_records('course_info_categories', array('categoryid' => $id));
+                foreach($categoryIds as $categoryid){
                     $cdata = new stdClass();
-					$cdata->categoryid = $data->id;
-					$cdata->course_category = $categoryid;
-					$DB->insert_record('course_info_categories', $cdata);
-				}
+                             $cdata->categoryid = $data->id;
+                             $cdata->course_category = $categoryid;
+                             $DB->insert_record('course_info_categories', $cdata);
+                }
                 $DB->update_record('course_info_category', $data);
             }
             profile_reorder_categories();
@@ -504,9 +520,9 @@ function profile_edit_category($id, $redirect) {
         } else {
             $strheading = get_string('profileeditcategory', 'admin', format_string($category->name));
         }
-		array_push($usedCategoryIds,0);
-		if($id){
-			$checkboxjs = "
+        array_push($usedCategoryIds,0);
+        if($id){
+               $checkboxjs = "
 			<script>
 			var selectedCategory = new Array(".implode(",",$usedCategoryIds).");
 			var domcheckbox = document.getElementsByTagName('INPUT');
@@ -520,15 +536,15 @@ function profile_edit_category($id, $redirect) {
 				}
 			}
 			</script>";
-		}
+        }
 
         /// Print the page
         echo $OUTPUT->header();
         echo $OUTPUT->heading($strheading);
         $categoryform->display();
-		if($id){
-			echo $checkboxjs;
-		}
+        if($id){
+               echo $checkboxjs;
+        }
         echo $OUTPUT->footer();
         die;
     }
@@ -538,7 +554,7 @@ function profile_edit_category($id, $redirect) {
 function profile_edit_field($id, $datatype, $redirect) {
     global $CFG, $DB, $OUTPUT, $PAGE;
 
-    if (!$field = $DB->get_record('waitlist_info_field', array('id'=>$id))) {
+    if (!$field = $DB->get_record('waitlist_info_field', array('id' => $id))) {
         $field = new stdClass();
         $field->datatype = $datatype;
         $field->description = '';
@@ -548,21 +564,21 @@ function profile_edit_field($id, $datatype, $redirect) {
 
         $field->param2 = '';
     }
-	/*
-	if($id){
-		$categoryIds = array();
-		$courseCategorys = $DB->get_records('course_info_category', array('field_id'=>$id));
-		foreach($courseCategorys as $courseCategory){
-			$categoryIds[] = $courseCategory->category_id;
-		}
-	}
-	*/
+    /*
+    if($id){
+    $categoryIds = array();
+    $courseCategorys = $DB->get_records('course_info_category', array('field_id'=>$id));
+    foreach($courseCategorys as $courseCategory){
+    $categoryIds[] = $courseCategory->category_id;
+    }
+    }
+    */
     // Clean and prepare description for the editor
     $field->description = clean_text($field->description, $field->descriptionformat);
-    $field->description = array('text'=>$field->description, 'format'=>$field->descriptionformat, 'itemid'=>0);
+    $field->description = array('text' => $field->description, 'format' => $field->descriptionformat, 'itemid' => 0);
 
     $field->param2 = clean_text($field->param2, $field->descriptionformat);
-    $field->param2 = array('text'=>$field->param2, 'format'=>$field->descriptionformat, 'itemid'=>0);
+    $field->param2 = array('text' => $field->param2, 'format' => $field->descriptionformat, 'itemid' => 0);
 
     require_once('index_field_form.php');
     $fieldform = new field_form(null, $field->datatype);
@@ -572,7 +588,7 @@ function profile_edit_field($id, $datatype, $redirect) {
         foreach ($fieldform->editors() as $editor) {
             if (isset($field->$editor)) {
                 $field->$editor = clean_text($field->$editor, $field->{$editor.'format'});
-                $field->$editor = array('text'=>$field->$editor, 'format'=>$field->{$editor.'format'}, 'itemid'=>0);
+                $field->$editor = array('text' => $field->$editor, 'format' => $field->{$editor.'format'}, 'itemid' => 0);
             }
         }
     }
@@ -605,7 +621,7 @@ function profile_edit_field($id, $datatype, $redirect) {
             }
             */
 
-            // Convert the data format for
+            // Convert the data format for.
             if (is_array($fieldform->editors())) {
                 foreach ($fieldform->editors() as $editor) {
                     if (isset($field->$editor)) {
@@ -614,14 +630,7 @@ function profile_edit_field($id, $datatype, $redirect) {
                     }
                 }
             }
-			/*
-			unset($data->categoryid);
-			foreach($_POST['categoryid'] as $categoryid){
-				if($categoryid>0){
-					$data->categoryid[] = $categoryid;
-				}
-			}
-			*/
+           
             $formfield->define_save($data);
             redirect($redirect);
         }
@@ -633,32 +642,32 @@ function profile_edit_field($id, $datatype, $redirect) {
         } else {
             $strheading = get_string('profileeditfield', 'admin', $field->name);
         }
-		/*
-		if($id){
-			$checkboxjs = "
-			<script>
-			var selectedCategory = new Array(".implode(",",$categoryIds).");
-			var domcheckbox = document.getElementsByTagName('INPUT');
-			for (var i=0;i<domcheckbox.length;i++ ){
-				if(domcheckbox[i].type == 'checkbox'){
-					for(var j=0;j<selectedCategory.length;j++){
-					if(domcheckbox[i].value == selectedCategory[j]){
-							domcheckbox[i].checked = true;
-						}
-					}
-				}
-			}
-			</script>";
-		}
-		*/
+        /*
+        if($id){
+        $checkboxjs = "
+        <script>
+        var selectedCategory = new Array(".implode(",",$categoryIds).");
+        var domcheckbox = document.getElementsByTagName('INPUT');
+        for (var i=0;i<domcheckbox.length;i++ ){
+        if(domcheckbox[i].type == 'checkbox'){
+        for(var j=0;j<selectedCategory.length;j++){
+        if(domcheckbox[i].value == selectedCategory[j]){
+        domcheckbox[i].checked = true;
+        }
+        }
+        }
+        }
+        </script>";
+        }
+        */
         /// Print the page
         $PAGE->navbar->add($strheading);
         echo $OUTPUT->header();
         echo $OUTPUT->heading($strheading);
         $fieldform->display();
-		//if($id){
-		//	echo $checkboxjs;
-		//}
+        // if($id){
+        // echo $checkboxjs;
+        // }
         echo $OUTPUT->footer();
         die;
     }

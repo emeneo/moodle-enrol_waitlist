@@ -36,8 +36,8 @@ class waitlist_fields_profile_define_textarea extends waitlist_fields_profile_de
      */
     public function define_form_specific($form) {
         // Default data.
-        //$form->addElement('editor', 'defaultdata', get_string('profiledefaultdata', 'admin'));
-        //$form->setType('defaultdata', PARAM_RAW); // We have to trust person with capability to edit this default description.
+        // $form->addElement('editor', 'defaultdata', get_string('profiledefaultdata', 'admin'));
+        // $form->setType('defaultdata', PARAM_RAW); // We have to trust person with capability to edit this default description.
     }
 
     /**

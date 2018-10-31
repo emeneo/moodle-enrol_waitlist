@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /// Some constants
 
@@ -28,8 +42,8 @@ class course_fields_profile_field_base {
      * @param   integer   id of the profile from the user_info_field table
      * @param   integer   id of the user for whom we are displaying data
      */
- /*   function course_fields_profile_field_base($fieldid=0, $courseid=0) { */
-      function __construct($fieldid=0, $courseid=0) { 
+    /*   function course_fields_profile_field_base($fieldid=0, $courseid=0) { */
+    function __construct($fieldid=0, $courseid=0) {
         global $USER;
 
         $this->set_fieldid($fieldid);
@@ -38,7 +52,7 @@ class course_fields_profile_field_base {
     }
 
 
-/***** The following methods must be overwritten by child classes *****/
+    /***** The following methods must be overwritten by child classes *****/
 
     /**
      * Abstract method: Adds the profile field to the moodle form class
@@ -49,7 +63,7 @@ class course_fields_profile_field_base {
     }
 
 
-/***** The following methods may be overwritten by child classes *****/
+    /***** The following methods may be overwritten by child classes *****/
 
     /**
      * Display the data for this field
@@ -107,15 +121,15 @@ class course_fields_profile_field_base {
 
         $data = new stdClass();
 
-        //$coursenew->{$this->inputname} = $this->edit_save_data_preprocess($coursenew->{$this->inputname}, $data);
-		$filedName = str_replace('profile_field_','',$this->inputname);
-		$field = $DB->get_record('course_info_field',array('shortname'=>$filedName));
-		
+        // $coursenew->{$this->inputname} = $this->edit_save_data_preprocess($coursenew->{$this->inputname}, $data);
+        $filedName = str_replace('profile_field_','',$this->inputname);
+        $field = $DB->get_record('course_info_field',array('shortname' => $filedName));
+
         $data->course_id  = $coursenew->id;
-        //$data->fieldid = $coursenew->field->id;
-		$data->fieldid = $field->id;
+        // $data->fieldid = $coursenew->field->id;
+        $data->fieldid = $field->id;
         $data->data    = $coursenew->{$this->inputname};
-        if ($dataid = $DB->get_field('course_info_data', 'id', array('course_id'=>$data->course_id, 'fieldid'=>$data->fieldid))) {
+        if ($dataid = $DB->get_field('course_info_data', 'id', array('course_id' => $data->course_id, 'fieldid' => $data->fieldid))) {
             $data->id = $dataid;
             $DB->update_record('course_info_data', $data);
         } else {
@@ -207,7 +221,7 @@ class course_fields_profile_field_base {
      * @param   object   a course object
      */
     function edit_load_course_data($course) {
-        if ($this->data !== NULL) {
+        if ($this->data !== null) {
             $course->{$this->inputname} = $this->data;
         }
     }
@@ -223,7 +237,7 @@ class course_fields_profile_field_base {
     }
 
 
-/***** The following methods generally should not be overwritten by child classes *****/
+    /***** The following methods generally should not be overwritten by child classes *****/
 
     /**
      * Accessor method: set the userid for this instance
@@ -249,8 +263,8 @@ class course_fields_profile_field_base {
         global $DB;
 
         /// Load the field object
-        if (($this->fieldid == 0) or (!($field = $DB->get_record('course_info_field', array('id'=>$this->fieldid))))) {
-            $this->field = NULL;
+        if (($this->fieldid == 0) or (!($field = $DB->get_record('course_info_field', array('id' => $this->fieldid))))) {
+            $this->field = null;
             $this->inputname = '';
         } else {
             $this->field = $field;
@@ -258,7 +272,7 @@ class course_fields_profile_field_base {
         }
 
         if (!empty($this->field)) {
-            if ($data = $DB->get_record('course_info_data', array('course_id'=>$this->courseid, 'fieldid'=>$this->fieldid), 'data, dataformat')) {
+            if ($data = $DB->get_record('course_info_data', array('course_id' => $this->courseid, 'fieldid' => $this->fieldid), 'data, dataformat')) {
                 $this->data = $data->data;
                 $this->dataformat = $data->dataformat;
             } else {
@@ -266,7 +280,7 @@ class course_fields_profile_field_base {
                 $this->dataformat = FORMAT_HTML;
             }
         } else {
-            $this->data = NULL;
+            $this->data = null;
         }
     }
 
@@ -361,12 +375,12 @@ function profile_course_fields_definition($mform, $categoryid = 0,$courseid = 0)
     global $CFG, $DB;
 
     // if user is "admin" fields are displayed regardless
-    //$update = has_capability('moodle/user:update', get_context_instance(CONTEXT_SYSTEM));
+    // $update = has_capability('moodle/user:update', get_context_instance(CONTEXT_SYSTEM));
 
-    if ($categories = $DB->get_records('course_info_categories', array('course_category'=>$categoryid))) {
+    if ($categories = $DB->get_records('course_info_categories', array('course_category' => $categoryid))) {
         foreach ($categories as $category) {
-			$categoryInfo = $DB->get_record('course_info_category',array('id'=>$category->categoryid));
-            if ($fields = $DB->get_records('course_info_field', array('categoryid'=>$category->categoryid))) {
+            $categoryInfo = $DB->get_record('course_info_category',array('id' => $category->categoryid));
+            if ($fields = $DB->get_records('course_info_field', array('categoryid' => $category->categoryid))) {
                 // check first if *any* fields will be displayed
                 $display = false;
                 foreach ($fields as $field) {
@@ -422,7 +436,7 @@ function profile_course_fields_validation($usernew, $files) {
 
 function profile_course_fields_save_data($coursenew) {
     global $CFG, $DB;
-	//echo "<pre>";print_r($coursenew);die();
+    // echo "<pre>";print_r($coursenew);die();
     if ($fields = $DB->get_records('course_info_field')) {
         foreach ($fields as $field) {
             require_once($CFG->dirroot.'/local/course_fields/profile/field/'.$field->datatype.'/field.class.php');
@@ -438,7 +452,7 @@ function profile_course_fields_display_fields($userid) {
 
     if ($categories = $DB->get_records('user_info_category', null, 'sortorder ASC')) {
         foreach ($categories as $category) {
-            if ($fields = $DB->get_records('user_info_field', array('categoryid'=>$category->id), 'sortorder ASC')) {
+            if ($fields = $DB->get_records('user_info_field', array('categoryid' => $category->id), 'sortorder ASC')) {
                 foreach ($fields as $field) {
                     require_once($CFG->dirroot.'/user/profile/field/'.$field->datatype.'/field.class.php');
                     $newfield = 'profile_field_'.$field->datatype;
@@ -460,8 +474,8 @@ function profile_course_fields_display_fields($userid) {
 function profile_course_fields_signup_fields($mform) {
     global $CFG, $DB;
 
-     //only retrieve required custom fields (with category information)
-    //results are sort by categories, then by fields
+     // only retrieve required custom fields (with category information)
+    // results are sort by categories, then by fields
     $sql = "SELECT uf.id as fieldid, ic.id as categoryid, ic.name as categoryname, uf.datatype
                 FROM {user_info_field} uf
                 JOIN {user_info_category} ic
@@ -470,7 +484,7 @@ function profile_course_fields_signup_fields($mform) {
 
     if ( $fields = $DB->get_records_sql($sql)) {
         foreach ($fields as $field) {
-            //check if we change the categories
+            // check if we change the categories
             if (!isset($currentcat) || $currentcat != $field->categoryid) {
                  $currentcat = $field->categoryid;
                  $mform->addElement('header', 'category_'.$field->categoryid, format_string($field->categoryname));

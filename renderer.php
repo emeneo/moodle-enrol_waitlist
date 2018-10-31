@@ -1,4 +1,21 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+defined('MOODLE_INTERNAL') || die();
+
 class core_waitlist_renderer extends plugin_renderer_base {
 
     /**
@@ -134,7 +151,7 @@ class core_waitlist_renderer extends plugin_renderer_base {
         if ($searchbutton) {
             $content .= $this->output->render($searchbutton);
         }
-        $content .= html_writer::tag('div', get_string('otheruserdesc', 'enrol'), array('class'=>'otherusersdesc'));
+        $content .= html_writer::tag('div', get_string('otheruserdesc', 'enrol'), array('class' => 'otherusersdesc'));
         $content .= $this->output->render($table->get_paging_bar());
         $content .= html_writer::table($table);
         $content .= $this->output->render($table->get_paging_bar());
@@ -160,14 +177,14 @@ class core_waitlist_renderer extends plugin_renderer_base {
 
         // get list of roles
         $rolesoutput = '';
-        foreach ($roles as $roleid=>$role) {
+        foreach ($roles as $roleid => $role) {
             if ($canassign and (is_siteadmin() or isset($assignableroles[$roleid])) and !$role['unchangeable']) {
                 $strunassign = get_string('unassignarole', 'role', $role['text']);
-                $icon = html_writer::empty_tag('img', array('alt'=>$strunassign, 'src'=>$iconenrolremove));
-                $url = new moodle_url($pageurl, array('action'=>'unassign', 'roleid'=>$roleid, 'user'=>$userid));
-                $rolesoutput .= html_writer::tag('div', $role['text'] . html_writer::link($url, $icon, array('class'=>'unassignrolelink', 'rel'=>$roleid, 'title'=>$strunassign)), array('class'=>'role role_'.$roleid));
+                $icon = html_writer::empty_tag('img', array('alt' => $strunassign, 'src' => $iconenrolremove));
+                $url = new moodle_url($pageurl, array('action' => 'unassign', 'roleid' => $roleid, 'user' => $userid));
+                $rolesoutput .= html_writer::tag('div', $role['text'] . html_writer::link($url, $icon, array('class' => 'unassignrolelink', 'rel' => $roleid, 'title' => $strunassign)), array('class' => 'role role_'.$roleid));
             } else {
-                $rolesoutput .= html_writer::tag('div', $role['text'], array('class'=>'role unchangeable', 'rel'=>$roleid));
+                $rolesoutput .= html_writer::tag('div', $role['text'], array('class' => 'role unchangeable', 'rel' => $roleid));
             }
         }
         $output = '';
@@ -181,12 +198,12 @@ class core_waitlist_renderer extends plugin_renderer_base {
                 }
             }
             if (!$hasallroles) {
-                $url = new moodle_url($pageurl, array('action'=>'assign', 'user'=>$userid));
-                $icon = html_writer::empty_tag('img', array('alt'=>get_string('assignroles', 'role'), 'src'=>$iconenroladd));
-                $output = html_writer::tag('div', html_writer::link($url, $icon, array('class'=>'assignrolelink', 'title'=>get_string('assignroles', 'role'))), array('class'=>'addrole'));
+                $url = new moodle_url($pageurl, array('action' => 'assign', 'user' => $userid));
+                $icon = html_writer::empty_tag('img', array('alt' => get_string('assignroles', 'role'), 'src' => $iconenroladd));
+                $output = html_writer::tag('div', html_writer::link($url, $icon, array('class' => 'assignrolelink', 'title' => get_string('assignroles', 'role'))), array('class' => 'addrole'));
             }
         }
-        $output .= html_writer::tag('div', $rolesoutput, array('class'=>'roles'));
+        $output .= html_writer::tag('div', $rolesoutput, array('class' => 'roles'));
         return $output;
     }
 
@@ -206,20 +223,20 @@ class core_waitlist_renderer extends plugin_renderer_base {
         $straddgroup = get_string('addgroup', 'group');
 
         $groupoutput = '';
-        foreach($groups as $groupid=>$name) {
+        foreach($groups as $groupid => $name) {
             if ($canmanagegroups and groups_remove_member_allowed($groupid, $userid)) {
-                $icon = html_writer::empty_tag('img', array('alt'=>get_string('removefromgroup', 'group', $name), 'src'=>$iconenrolremove));
-                $url = new moodle_url($pageurl, array('action'=>'removemember', 'group'=>$groupid, 'user'=>$userid));
-                $groupoutput .= html_writer::tag('div', $name . html_writer::link($url, $icon), array('class'=>'group', 'rel'=>$groupid));
+                $icon = html_writer::empty_tag('img', array('alt' => get_string('removefromgroup', 'group', $name), 'src' => $iconenrolremove));
+                $url = new moodle_url($pageurl, array('action' => 'removemember', 'group' => $groupid, 'user' => $userid));
+                $groupoutput .= html_writer::tag('div', $name . html_writer::link($url, $icon), array('class' => 'group', 'rel' => $groupid));
             } else {
-                $groupoutput .= html_writer::tag('div', $name, array('class'=>'group', 'rel'=>$groupid));
+                $groupoutput .= html_writer::tag('div', $name, array('class' => 'group', 'rel' => $groupid));
             }
         }
-        $groupoutput = html_writer::tag('div', $groupoutput, array('class'=>'groups'));
+        $groupoutput = html_writer::tag('div', $groupoutput, array('class' => 'groups'));
         if ($canmanagegroups && (count($groups) < count($allgroups))) {
-            $icon = html_writer::empty_tag('img', array('alt'=>$straddgroup, 'src'=>$iconenroladd));
-            $url = new moodle_url($pageurl, array('action'=>'addmember', 'user'=>$userid));
-            $groupoutput .= html_writer::tag('div', html_writer::link($url, $icon), array('class'=>'addgroup'));
+            $icon = html_writer::empty_tag('img', array('alt' => $straddgroup, 'src' => $iconenroladd));
+            $url = new moodle_url($pageurl, array('action' => 'addmember', 'user' => $userid));
+            $groupoutput .= html_writer::tag('div', html_writer::link($url, $icon), array('class' => 'addgroup'));
         }
         return $groupoutput;
     }
@@ -237,14 +254,14 @@ class core_waitlist_renderer extends plugin_renderer_base {
         foreach ($enrolments as $ue) {
             $enrolmentoutput = $ue['text'].' '.$ue['period'];
             if ($ue['dimmed']) {
-                $enrolmentoutput = html_writer::tag('span', $enrolmentoutput, array('class'=>'dimmed_text'));
+                $enrolmentoutput = html_writer::tag('span', $enrolmentoutput, array('class' => 'dimmed_text'));
             } else {
                 $enrolmentoutput = html_writer::tag('span', $enrolmentoutput);
             }
             foreach ($ue['actions'] as $action) {
                 $enrolmentoutput .= $this->render($action);
             }
-            $output .= html_writer::tag('div', $enrolmentoutput, array('class'=>'enrolment'));
+            $output .= html_writer::tag('div', $enrolmentoutput, array('class' => 'enrolment'));
         }
         return $output;
     }
@@ -392,7 +409,7 @@ class course_waitlist_table extends html_table implements renderable {
         $this->sort           = optional_param(self::SORTVAR, self::DEFAULTSORT, PARAM_ALPHANUM);
         $this->sortdirection  = optional_param(self::SORTDIRECTIONVAR, self::DEFAULTSORTDIRECTION, PARAM_ALPHA);
 
-        $this->attributes = array('class'=>'userenrolment');
+        $this->attributes = array('class' => 'userenrolment');
         if (!in_array($this->sort, self::$sortablefields)) {
             $this->sort = self::DEFAULTSORT;
         }
@@ -430,7 +447,7 @@ class course_waitlist_table extends html_table implements renderable {
      */
     public function get_field_sort_direction($field) {
         if ($field == $this->sort) {
-            return ($this->sortdirection == 'ASC')?'DESC':'ASC';
+            return ($this->sortdirection == 'ASC') ? 'DESC' : 'ASC';
         }
         return self::DEFAULTSORTDIRECTION;
     }
@@ -468,11 +485,11 @@ class course_waitlist_table extends html_table implements renderable {
                     if (!in_array($n, self::$sortablefields)) {
                         $bits[] = $l;
                     } else {
-                        $link = html_writer::link(new moodle_url($url, array(self::SORTVAR=>$n)), $fields[$name][$n]);
+                        $link = html_writer::link(new moodle_url($url, array(self::SORTVAR => $n)), $fields[$name][$n]);
                         if ($this->sort == $n) {
-                            $link .= html_writer::link(new moodle_url($url, array(self::SORTVAR=>$n, self::SORTDIRECTIONVAR=>$this->get_field_sort_direction($n))), $this->get_direction_icon($output, $n));
+                            $link .= html_writer::link(new moodle_url($url, array(self::SORTVAR => $n, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($n))), $this->get_direction_icon($output, $n));
                         }
-                        $bits[] = html_writer::tag('span', $link, array('class'=>'subheading_'.$n));
+                        $bits[] = html_writer::tag('span', $link, array('class' => 'subheading_'.$n));
 
                     }
                 }
@@ -481,9 +498,9 @@ class course_waitlist_table extends html_table implements renderable {
                 if (!in_array($name, self::$sortablefields)) {
                     $newlabel = $label;
                 } else {
-                    $newlabel  = html_writer::link(new moodle_url($url, array(self::SORTVAR=>$name)), $fields[$name]);
+                    $newlabel  = html_writer::link(new moodle_url($url, array(self::SORTVAR => $name)), $fields[$name]);
                     if ($this->sort == $name) {
-                        $newlabel .= html_writer::link(new moodle_url($url, array(self::SORTVAR=>$name, self::SORTDIRECTIONVAR=>$this->get_field_sort_direction($name))), $this->get_direction_icon($output, $name));
+                        $newlabel .= html_writer::link(new moodle_url($url, array(self::SORTVAR => $name, self::SORTDIRECTIONVAR => $this->get_field_sort_direction($name))), $this->get_direction_icon($output, $name));
                     }
                 }
             }
@@ -512,7 +529,7 @@ class course_waitlist_table extends html_table implements renderable {
     public function set_users(array $users) {
         $this->users = $users;
         $hasbulkops = !empty($this->bulkoperations);
-        foreach ($users as $userid=>$user) {
+        foreach ($users as $userid => $user) {
             $user = (array)$user;
             $row = new html_table_row();
             $row->attributes = array('class' => 'userinforow');
@@ -528,7 +545,7 @@ class course_waitlist_table extends html_table implements renderable {
                     $bits = array();
                     foreach (array_keys($label) as $subfield) {
                         if (array_key_exists($subfield, $user)) {
-                            $bits[] = html_writer::tag('div', $user[$subfield], array('class'=>'subfield subfield_'.$subfield));
+                            $bits[] = html_writer::tag('div', $user[$subfield], array('class' => 'subfield subfield_'.$subfield));
                         }
                     }
                     if (empty($bits)) {
@@ -558,10 +575,10 @@ class course_waitlist_table extends html_table implements renderable {
             $modules = array('moodle-enrol-rolemanager', 'moodle-enrol-rolemanager-skin');
             $function = 'M.enrol.rolemanager.init';
             $arguments = array(
-                'containerId'=>$this->id,
-                'userIds'=>array_keys($this->users),
-                'courseId'=>$this->manager->get_course()->id,
-                'otherusers'=>isset($this->otherusers));
+                'containerId' => $this->id,
+                'userIds' => array_keys($this->users),
+                'courseId' => $this->manager->get_course()->id,
+                'otherusers' => isset($this->otherusers));
             $this->manager->get_moodlepage()->requires->yui_module($modules, $function, array($arguments));
         }
     }

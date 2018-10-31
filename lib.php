@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * *************************************************************************
  * *                  Waitlist Enrol                                      **
@@ -8,7 +22,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later  **
  * *************************************************************************
  * ************************************************************************
-*/
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
 class enrol_waitlist_plugin extends enrol_plugin {
 
     /**
@@ -53,9 +70,9 @@ class enrol_waitlist_plugin extends enrol_plugin {
         global $DB;
 
         if (empty($instance->name)) {
-            if (!empty($instance->roleid) and $role = $DB->get_record('role', array('id'=>$instance->roleid))) {
-               // $role = ' (' . role_get_name($role, get_context_instance(CONTEXT_COURSE, $instance->courseid)) . ')';
-				$role = ' (' . role_get_name($role, context_course::instance($instance->courseid)) . ')';
+            if (!empty($instance->roleid) and $role = $DB->get_record('role', array('id' => $instance->roleid))) {
+                // $role = ' (' . role_get_name($role, get_context_instance(CONTEXT_COURSE, $instance->courseid)) . ')';
+                $role = ' (' . role_get_name($role, context_course::instance($instance->courseid)) . ')';
             } else {
                 $role = '';
             }
@@ -91,7 +108,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
      * @param object $instance
      * @return void
      */
-	 /*
+    /*
     public function add_course_navigation($instancesnode, stdClass $instance) {
         if ($instance->enrol !== 'waitlist') {
              throw new coding_exception('Invalid enrol instance type!');
@@ -103,9 +120,9 @@ class enrol_waitlist_plugin extends enrol_plugin {
             $instancesnode->add($this->get_instance_name($instance), $managelink, navigation_node::TYPE_SETTING);
         }
     }
-	*/
-	
-	/**
+    */
+
+    /**
      * Sets up navigation entries.
      *
      * @param stdClass $instancesnode
@@ -119,28 +136,28 @@ class enrol_waitlist_plugin extends enrol_plugin {
 
         $context = context_course::instance($instance->courseid);
         if (has_capability('enrol/waitlist:config', $context)) {
-            $managelink = new moodle_url('/enrol/waitlist/edit.php', array('courseid'=>$instance->courseid, 'id'=>$instance->id));
+            $managelink = new moodle_url('/enrol/waitlist/edit.php', array('courseid' => $instance->courseid, 'id' => $instance->id));
             $instancesnode->add($this->get_instance_name($instance), $managelink, navigation_node::TYPE_SETTING);
         }
     }
-	
-	
-	/*
-	public function unenrol_user($enrolId){
-		global $DB;
-		global $CFG;
 
-		$enrolment = $DB->get_record('user_enrolments', array('id'=>$enrolId), '*', MUST_EXIST);
-		$instance = $DB->get_record('enrol', array('id'=>$enrolment->enrolid), '*', MUST_EXIST);
 
-		require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
-		$waitlist = new waitlist();
-		$res = $waitlist->add_wait_list($instance->id, $enrolment->userid, $instance->roleid, $enrolment->timestart, $enrolment->timeend);
-		if($res){
-			$DB->delete_records('user_enrolments',array('id'=>$enrolId));
-		}
-	}
-	*/
+    /*
+    public function unenrol_user($enrolId){
+    global $DB;
+    global $CFG;
+
+    $enrolment = $DB->get_record('user_enrolments', array('id'=>$enrolId), '*', MUST_EXIST);
+    $instance = $DB->get_record('enrol', array('id'=>$enrolment->enrolid), '*', MUST_EXIST);
+
+    require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
+    $waitlist = new waitlist();
+    $res = $waitlist->add_wait_list($instance->id, $enrolment->userid, $instance->roleid, $enrolment->timestart, $enrolment->timeend);
+    if($res){
+    $DB->delete_records('user_enrolments',array('id'=>$enrolId));
+    }
+    }
+    */
 
     /**
      * Returns edit icons for the page with list of instances
@@ -153,24 +170,24 @@ class enrol_waitlist_plugin extends enrol_plugin {
         if ($instance->enrol !== 'waitlist') {
             throw new coding_exception('invalid enrol instance!');
         }
-        //$context = get_context_instance(CONTEXT_COURSE, $instance->courseid);
-		$context = context_course::instance($instance->courseid);
+        // $context = get_context_instance(CONTEXT_COURSE, $instance->courseid);
+        $context = context_course::instance($instance->courseid);
 
         $icons = array();
 
-		if (has_capability('enrol/waitlist:config', $context)) {
-            $managelink = new moodle_url("/enrol/waitlist/enroluser.php", array('enrolid'=>$instance->id));
-			$icons[] = $OUTPUT->action_icon($managelink, new pix_icon('t/enrolusers', get_string('enrolusers', 'enrol_waitlist'), 'core', array('class'=>'iconsmall')));
+        if (has_capability('enrol/waitlist:config', $context)) {
+            $managelink = new moodle_url("/enrol/waitlist/enroluser.php", array('enrolid' => $instance->id));
+               $icons[] = $OUTPUT->action_icon($managelink, new pix_icon('t/enrolusers', get_string('enrolusers', 'enrol_waitlist'), 'core', array('class' => 'iconsmall')));
         }
 
         if (has_capability('enrol/waitlist:config', $context)) {
-            $editlink = new moodle_url("/enrol/waitlist/edit.php", array('courseid'=>$instance->courseid, 'id'=>$instance->id));
-            $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('t/edit', get_string('edit'), 'core', array('class'=>'iconsmall')));
+            $editlink = new moodle_url("/enrol/waitlist/edit.php", array('courseid' => $instance->courseid, 'id' => $instance->id));
+            $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('t/edit', get_string('edit'), 'core', array('class' => 'iconsmall')));
         }
 
-		if (has_capability('enrol/waitlist:config', $context)) {
-            $editlink = new moodle_url("/enrol/waitlist/users.php", array('id'=>$instance->courseid));
-            $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('i/switchrole', get_string('waitlisted_users','enrol_waitlist'), 'core', array('class'=>'iconsmall')));
+        if (has_capability('enrol/waitlist:config', $context)) {
+            $editlink = new moodle_url("/enrol/waitlist/users.php", array('id' => $instance->courseid));
+            $icons[] = $OUTPUT->action_icon($editlink, new pix_icon('i/switchrole', get_string('waitlisted_users','enrol_waitlist'), 'core', array('class' => 'iconsmall')));
         }
 
         return $icons;
@@ -182,14 +199,14 @@ class enrol_waitlist_plugin extends enrol_plugin {
      * @return moodle_url page url
      */
     public function get_newinstance_link($courseid) {
-        //$context = get_context_instance(CONTEXT_COURSE, $courseid, MUST_EXIST);
-		$context = context_course::instance($courseid);
+        // $context = get_context_instance(CONTEXT_COURSE, $courseid, MUST_EXIST);
+        $context = context_course::instance($courseid);
 
         if (!has_capability('moodle/course:enrolconfig', $context) or !has_capability('enrol/waitlist:config', $context)) {
-            return NULL;
+            return null;
         }
         // multiple instances supported - different roles with different password
-        return new moodle_url('/enrol/waitlist/edit.php', array('courseid'=>$courseid));
+        return new moodle_url('/enrol/waitlist/edit.php', array('courseid' => $courseid));
     }
 
     /**
@@ -206,26 +223,26 @@ class enrol_waitlist_plugin extends enrol_plugin {
             // can not enrol guest!!
             return null;
         }
-        if ($DB->record_exists('user_enrolments', array('userid'=>$USER->id, 'enrolid'=>$instance->id))) {
-            //TODO: maybe we should tell them they are already enrolled, but can not access the course
+        if ($DB->record_exists('user_enrolments', array('userid' => $USER->id, 'enrolid' => $instance->id))) {
+            // TODO: maybe we should tell them they are already enrolled, but can not access the course
             return null;
-			
+
         }
 
-		if($DB->record_exists('user_enrol_waitlist', array('userid'=>$USER->id, 'instanceid'=>$instance->id))){
-			return $OUTPUT->notification(get_string('waitlistinfo', 'enrol_waitlist'));
-		}
+        if($DB->record_exists('user_enrol_waitlist', array('userid' => $USER->id, 'instanceid' => $instance->id))){
+               return $OUTPUT->notification(get_string('waitlistinfo', 'enrol_waitlist'));
+        }
 
         if ($instance->enrolstartdate != 0 and $instance->enrolstartdate > time()) {
-            //TODO: inform that we can not enrol yet
+            // TODO: inform that we can not enrol yet
             return null;
         }
-		/*
+        /*
         if ($instance->enrolenddate != 0 and $instance->enrolenddate < time()) {
             //TODO: inform that enrolment is not possible any more
             return null;
         }
-		
+
         if ($instance->customint3 > 0) {
             // max enrol limit specified
             $count = $DB->count_records('user_enrolments', array('enrolid'=>$instance->id));
@@ -234,20 +251,20 @@ class enrol_waitlist_plugin extends enrol_plugin {
                 return $OUTPUT->notification(get_string('maxenrolledreached', 'enrol_waitlist'));
             }
         }
-		*/
+        */
         require_once("$CFG->dirroot/enrol/waitlist/locallib.php");
         require_once("$CFG->dirroot/group/lib.php");
-		require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
+        require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
 
-		$waitlist = new waitlist();
-		
-		/*
-		if(!$waitlist->vaildate_wait_list($instance->id,$USER->id)){
-			return $OUTPUT->notification(get_string('waitlistinfo', 'enrol_waitlist'));
-		}
-		*/
+        $waitlist = new waitlist();
 
-        $form = new enrol_waitlist_enrol_form(NULL, $instance);
+        /*
+        if(!$waitlist->vaildate_wait_list($instance->id,$USER->id)){
+        return $OUTPUT->notification(get_string('waitlistinfo', 'enrol_waitlist'));
+        }
+        */
+
+        $form = new enrol_waitlist_enrol_form(null, $instance);
         $instanceid = optional_param('instance', 0, PARAM_INT);
 
         if ($instance->id == $instanceid) {
@@ -260,35 +277,35 @@ class enrol_waitlist_plugin extends enrol_plugin {
                     $timeend = 0;
                 }
 
-                //$this->enrol_user($instance, $USER->id, $instance->roleid, $timestart, $timeend);
-				$enroledCount = $DB->count_records('user_enrolments', array('enrolid'=>$instance->id));
+                // $this->enrol_user($instance, $USER->id, $instance->roleid, $timestart, $timeend);
+                $enroledCount = $DB->count_records('user_enrolments', array('enrolid' => $instance->id));
 
-				$canEnrol = false;
+                $canEnrol = false;
                 if($instance->customint3 == 0){
                     $canEnrol = true;
-                }elseif($enroledCount<$instance->customint3){
+                }else if($enroledCount < $instance->customint3){
                     $canEnrol = true;
                     if($instance->enrolenddate){
-                        if(time()>$instance->enrolenddate){
+                        if(time() > $instance->enrolenddate){
                             $canEnrol = false;
                         }
                     }
                 }
 
-				if($canEnrol){
-					$this->enrol_user($instance, $USER->id, $instance->roleid, $timestart, $timeend);
-					if ($instance->customint4) {
-						$user =  $DB->get_record_sql("select * from ".$CFG->prefix."user where id=".$USER->id);
-						$this->email_welcome_message($instance, $USER);
-					}
-				}else{
-					$waitlist->add_wait_list($instance->id, $USER->id, $instance->roleid, $timestart, $timeend);
-				}
-                //add_to_log($instance->courseid, 'course', 'enrol', '../enrol/users.php?id='.$instance->courseid, $instance->courseid); //there should be userid somewhere!
+                if($canEnrol){
+                             $this->enrol_user($instance, $USER->id, $instance->roleid, $timestart, $timeend);
+                    if ($instance->customint4) {
+                        $user = $DB->get_record_sql("select * from ".$CFG->prefix."user where id=".$USER->id);
+                        $this->email_welcome_message($instance, $USER);
+                    }
+                }else{
+                             $waitlist->add_wait_list($instance->id, $USER->id, $instance->roleid, $timestart, $timeend);
+                }
+                // add_to_log($instance->courseid, 'course', 'enrol', '../enrol/users.php?id='.$instance->courseid, $instance->courseid); //there should be userid somewhere!
 
                 if ($instance->password and $instance->customint1 and $data->enrolpassword !== $instance->password) {
                     // it must be a group enrolment, let's assign group too
-                    $groups = $DB->get_records('groups', array('courseid'=>$instance->courseid), 'id', 'id, enrolmentkey');
+                    $groups = $DB->get_records('groups', array('courseid' => $instance->courseid), 'id', 'id, enrolmentkey');
                     foreach ($groups as $group) {
                         if (empty($group->enrolmentkey)) {
                             continue;
@@ -300,10 +317,10 @@ class enrol_waitlist_plugin extends enrol_plugin {
                     }
                 }
                 // send welcome
-                //if ($instance->customint4) {
-                    //$this->email_welcome_message($instance, $USER);
-                //}
-				redirect("$CFG->wwwroot/course/view.php?id=$instance->courseid");
+                // if ($instance->customint4) {
+                    // $this->email_welcome_message($instance, $USER);
+                // }
+                redirect("$CFG->wwwroot/course/view.php?id=$instance->courseid");
             }
         }
 
@@ -345,31 +362,31 @@ class enrol_waitlist_plugin extends enrol_plugin {
     protected function email_welcome_message($instance, $user) {
         global $CFG, $DB;
 
-        $course = $DB->get_record('course', array('id'=>$instance->courseid), '*', MUST_EXIST);
+        $course = $DB->get_record('course', array('id' => $instance->courseid), '*', MUST_EXIST);
 
         $a = new stdClass();
         $a->coursename = format_string($course->fullname);
         $a->profileurl = "$CFG->wwwroot/user/view.php?id=$user->id&course=$course->id";
-		$a->summary = $course->summary;
-		$a->startdate = '';
-		if($course->startdate != 0){
-			$a->startdate = date('Y-m-d',$course->startdate);
-		}
+        $a->summary = $course->summary;
+        $a->startdate = '';
+        if($course->startdate != 0){
+               $a->startdate = date('Y-m-d',$course->startdate);
+        }
 
         if (trim($instance->customtext1) !== '') {
             $message = $instance->customtext1;
             $message = str_replace('{$a->coursename}', $a->coursename, $message);
             $message = str_replace('{$a->profileurl}', $a->profileurl, $message);
-			$message = str_replace('{$a->summary}', $a->summary, $message);
-			$message = str_replace('{$a->startdate}', $a->startdate, $message);
+            $message = str_replace('{$a->summary}', $a->summary, $message);
+            $message = str_replace('{$a->startdate}', $a->startdate, $message);
         } else {
             $message = get_string('welcometocoursetext', 'enrol_waitlist', $a);
         }
 
         $subject = get_string('welcometocourse', 'enrol_waitlist', format_string($course->fullname));
 
-        //$context = get_context_instance(CONTEXT_COURSE, $course->id);
-		$context = context_course::instance($course->id);
+        // $context = get_context_instance(CONTEXT_COURSE, $course->id);
+        $context = context_course::instance($course->id);
         $rusers = array();
         if (!empty($CFG->coursecontact)) {
             $croles = explode(',', $CFG->coursecontact);
@@ -381,7 +398,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
             $contact = get_admin();
         }
 
-        //directly emailing welcome message rather than using messaging
+        // directly emailing welcome message rather than using messaging
         email_to_user($user, $contact, $subject, '',$message);
     }
 
@@ -400,8 +417,8 @@ class enrol_waitlist_plugin extends enrol_plugin {
 
         $now = time();
 
-        //note: the logic of waitlist enrolment guarantees that user logged in at least once (=== u.lastaccess set)
-        //      and that user accessed course at least once too (=== user_lastaccess record exists)
+        // note: the logic of waitlist enrolment guarantees that user logged in at least once (=== u.lastaccess set)
+        // and that user accessed course at least once too (=== user_lastaccess record exists)
 
         // first deal with users that did not log in for a really long time
         $sql = "SELECT e.*, ue.userid
@@ -409,7 +426,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
                   JOIN {enrol} e ON (e.id = ue.enrolid AND e.enrol = 'waitlist' AND e.customint2 > 0)
                   JOIN {user} u ON u.id = ue.userid
                  WHERE :now - u.lastaccess > e.customint2";
-        $rs = $DB->get_recordset_sql($sql, array('now'=>$now));
+        $rs = $DB->get_recordset_sql($sql, array('now' => $now));
         foreach ($rs as $instance) {
             $userid = $instance->userid;
             unset($instance->userid);
@@ -424,7 +441,7 @@ class enrol_waitlist_plugin extends enrol_plugin {
                   JOIN {enrol} e ON (e.id = ue.enrolid AND e.enrol = 'waitlist' AND e.customint2 > 0)
                   JOIN {user_lastaccess} ul ON (ul.userid = ue.userid AND ul.courseid = e.courseid)
                  WHERE :now - ul.timeaccess > e.customint2";
-        $rs = $DB->get_recordset_sql($sql, array('now'=>$now));
+        $rs = $DB->get_recordset_sql($sql, array('now' => $now));
         foreach ($rs as $instance) {
             $userid = $instance->userid;
             unset($instance->userid);
@@ -433,13 +450,13 @@ class enrol_waitlist_plugin extends enrol_plugin {
         }
         $rs->close();
 
-		//wait list
-		$this->process_wait_list();
+        // wait list
+        $this->process_wait_list();
 
         flush();
     }
 
-	public function get_user_enrolment_actions(course_enrolment_manager $manager, $ue) {
+    public function get_user_enrolment_actions(course_enrolment_manager $manager, $ue) {
         $actions = array();
         $context = $manager->get_context();
         $instance = $ue->enrolmentinstance;
@@ -447,80 +464,80 @@ class enrol_waitlist_plugin extends enrol_plugin {
         $params['ue'] = $ue->id;
         if ($this->allow_unenrol($instance) && has_capability("enrol/self:unenrol", $context)) {
             $url = new moodle_url('/enrol/unenroluser.php', $params);
-            $actions[] = new user_enrolment_action(new pix_icon('t/delete', ''), get_string('unenrol', 'enrol'), $url, array('class'=>'unenrollink', 'rel'=>$ue->id));
+            $actions[] = new user_enrolment_action(new pix_icon('t/delete', ''), get_string('unenrol', 'enrol'), $url, array('class' => 'unenrollink', 'rel' => $ue->id));
         }
         if ($this->allow_manage($instance) && has_capability("enrol/self:manage", $context)) {
             $url = new moodle_url('/enrol/editenrolment.php', $params);
-            $actions[] = new user_enrolment_action(new pix_icon('t/edit', ''), get_string('edit'), $url, array('class'=>'editenrollink', 'rel'=>$ue->id));
+            $actions[] = new user_enrolment_action(new pix_icon('t/edit', ''), get_string('edit'), $url, array('class' => 'editenrollink', 'rel' => $ue->id));
         }
         return $actions;
     }
 
-/**
- * Is it possible to hide/show enrol instance via standard UI?
- *
- * @param stdClass $instance
- * @return bool
- */
-public function can_hide_show_instance($instance) {
-    $context = context_course::instance($instance->courseid);
-    return has_capability('enrol/waitlist:config', $context);
-}
+    /**
+     * Is it possible to hide/show enrol instance via standard UI?
+     *
+     * @param stdClass $instance
+     * @return bool
+     */
+    public function can_hide_show_instance($instance) {
+        $context = context_course::instance($instance->courseid);
+        return has_capability('enrol/waitlist:config', $context);
+    }
 
-/**
- * Is it possible to delete enrol instance via standard UI?
- *
- * @param stdClass $instance
- * @return bool
- */
-public function can_delete_instance($instance) {
-    $context = context_course::instance($instance->courseid);
-    return has_capability('enrol/waitlist:config', $context);
-}
-	
-	//cron process waitlist - 2012-11-01
-	public function process_wait_list(){
-		global $DB;
-		global $CFG;
-		require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
-		$waitlist = new waitlist();
+    /**
+     * Is it possible to delete enrol instance via standard UI?
+     *
+     * @param stdClass $instance
+     * @return bool
+     */
+    public function can_delete_instance($instance) {
+        $context = context_course::instance($instance->courseid);
+        return has_capability('enrol/waitlist:config', $context);
+    }
 
-		$rows = $waitlist->get_wait_list();
-		foreach($rows as $row){
-			$userCount = $DB->count_records('user', array('id'=>$row->userid,'deleted'=>0));
-			if(!$userCount){
-				$DB->delete_records('user_enrol_waitlist',array('id'=>$row->id));
-				continue;
-			}
+    // cron process waitlist - 2012-11-01
+    public function process_wait_list() {
+        global $DB;
+        global $CFG;
+        require_once("$CFG->dirroot/enrol/waitlist/waitlist.php");
+        $waitlist = new waitlist();
 
-			$instanceCount = $DB->count_records('enrol', array('id'=>$row->instanceid));
-			if(!$instanceCount){
-				$DB->delete_records('user_enrol_waitlist',array('id'=>$row->id));
-				continue;
-			}
-			$instance = $DB->get_record_sql("select * from ".$CFG->prefix."enrol where id=".$row->instanceid);
+        $rows = $waitlist->get_wait_list();
+        foreach($rows as $row){
+            $userCount = $DB->count_records('user', array('id' => $row->userid,'deleted' => 0));
+            if(!$userCount){
+                $DB->delete_records('user_enrol_waitlist',array('id' => $row->id));
+                continue;
+            }
 
-			if($instance){
-				if(!$instance->id){
-					continue;
-				}
-				$enroledCount = $DB->count_records('user_enrolments', array('enrolid'=>$instance->id));
-				if($enroledCount<$instance->customint3){
-					if($instance->enrolenddate){
-						if(time()>$instance->enrolenddate){
-							continue;
-						}
-					}
-					$this->enrol_user($instance, $row->userid, $row->roleid, $row->timestart, $row->timeend);
-					if ($instance->customint4) {
-						$user =  $DB->get_record_sql("select * from ".$CFG->prefix."user where id=".$row->userid);
-						$this->email_welcome_message($instance, $user);
-					}
-					$DB->delete_records('user_enrol_waitlist',array('id'=>$row->id));
-				}
-			}
-		}
-	}
+            $instanceCount = $DB->count_records('enrol', array('id' => $row->instanceid));
+            if(!$instanceCount){
+                $DB->delete_records('user_enrol_waitlist',array('id' => $row->id));
+                continue;
+            }
+            $instance = $DB->get_record_sql("select * from ".$CFG->prefix."enrol where id=".$row->instanceid);
+
+            if($instance){
+                if(!$instance->id){
+                    continue;
+                }
+                $enroledCount = $DB->count_records('user_enrolments', array('enrolid' => $instance->id));
+                if($enroledCount < $instance->customint3){
+                    if($instance->enrolenddate){
+                        if(time() > $instance->enrolenddate){
+                            continue;
+                        }
+                    }
+                    $this->enrol_user($instance, $row->userid, $row->roleid, $row->timestart, $row->timeend);
+                    if ($instance->customint4) {
+                        $user = $DB->get_record_sql("select * from ".$CFG->prefix."user where id=".$row->userid);
+                        $this->email_welcome_message($instance, $user);
+                    }
+                    $DB->delete_records('user_enrol_waitlist',array('id' => $row->id));
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -531,9 +548,11 @@ public function can_delete_instance($instance) {
  */
 function enrol_waitlist_supports($feature) {
     switch($feature) {
-        case ENROL_RESTORE_TYPE: return ENROL_RESTORE_EXACT;
+        case ENROL_RESTORE_TYPE:
+return ENROL_RESTORE_EXACT;
 
-        default: return null;
+        default:
+return null;
     }
 }
 

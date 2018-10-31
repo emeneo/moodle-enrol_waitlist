@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require('../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
@@ -16,7 +30,7 @@ $strcancelled       = get_string('cancelled');
 $strdefaultcategory = get_string('profiledefaultcategory', 'admin');
 $strnofields        = get_string('profilenofieldsdefined', 'admin');
 $strcreatefield     = get_string('profilecreatefield', 'enrol_waitlist');
-//$strcreatefield = 'Create a new waitlist fiele';
+// $strcreatefield = 'Create a new waitlist fiele';
 
 
 /// Do we have any actions to perform before printing the header
@@ -38,19 +52,19 @@ switch ($action) {
         profile_edit_field($id, $datatype, $redirect);
         die;
         break;
-	case 'editcategory':
+    case 'editcategory':
         $id = optional_param('id', 0, PARAM_INT);
 
         profile_edit_category($id, $redirect);
         die;
         break;
-	case 'deletecategory':
+    case 'deletecategory':
         $id      = required_param('id', PARAM_INT);
         confirm_sesskey();
         profile_delete_category($id);
         redirect($redirect,get_string('deleted'));
         break;
-	case 'movefield':
+    case 'movefield':
         $id  = required_param('id', PARAM_INT);
         $dir = required_param('dir', PARAM_ALPHA);
         if (confirm_sesskey()) {
@@ -59,17 +73,17 @@ switch ($action) {
         redirect($redirect);
         break;
     default:
-        //normal form
+        // normal form
 }
 
 /// Print the header
 echo $OUTPUT->header();
-//echo $OUTPUT->heading(get_string('coursefields', 'local_course_fields'));
+// echo $OUTPUT->heading(get_string('coursefields', 'local_course_fields'));
 echo $OUTPUT->heading('Waitlist Fields');
 $currenttab = 'define';
 include_once('managetabs.php');
 
-//$categories = $DB->get_records('course_categories', null, 'sortorder ASC');
+// $categories = $DB->get_records('course_categories', null, 'sortorder ASC');
 /// Show all categories
 /*
 $chkRes = $DB->get_records('course_info_category', array('name'=>'Others'));
@@ -80,9 +94,9 @@ if(!count($chkRes)){
 	$DB->insert_record('course_info_category', $categoryData);
 }
 */
-//$categories = $DB->get_records('course_info_category', null, 'sortorder ASC');
+// $categories = $DB->get_records('course_info_category', null, 'sortorder ASC');
 
-//foreach ($categories as $category) {
+// foreach ($categories as $category) {
     $table = new html_table();
     $table->head  = array(get_string('profilefield', 'enrol_waitlist'), get_string('edit'));
     $table->align = array('left', 'right');
@@ -90,12 +104,12 @@ if(!count($chkRes)){
     $table->attributes['class'] = 'generaltable profilefield';
     $table->data = array();
 
-	if ($fields = $DB->get_records('waitlist_info_field', array(), 'sortorder ASC')) {
-        foreach ($fields as $field) {
-            $table->data[] = array(format_string($field->name), profile_field_icons($field));
-        }
+if ($fields = $DB->get_records('waitlist_info_field', array(), 'sortorder ASC')) {
+    foreach ($fields as $field) {
+        $table->data[] = array(format_string($field->name), profile_field_icons($field));
     }
-	/*
+}
+    /*
 	if ($fields = $DB->get_records_sql('select b.* from '.$CFG->prefix.'course_info_category as a left join '.$CFG->prefix.'course_info_field as b on a.field_id=b.id where a.category_id='.$category->id)) {
         foreach ($fields as $field) {
             $table->data[] = array(format_string($field->name), profile_field_icons($field));
@@ -103,15 +117,15 @@ if(!count($chkRes)){
     }
 	*/
 
-    //echo $OUTPUT->heading(format_string($category->name));
-	//echo $OUTPUT->heading(format_string($category->name) .' '.profile_category_icons($category));
-    if (count($table->data)) {
-        echo html_writer::table($table);
-    } else {
-        echo $OUTPUT->notification($strnofields);
-    }
+    // echo $OUTPUT->heading(format_string($category->name));
+    // echo $OUTPUT->heading(format_string($category->name) .' '.profile_category_icons($category));
+if (count($table->data)) {
+    echo html_writer::table($table);
+} else {
+    echo $OUTPUT->notification($strnofields);
+}
 
-//} /// End of $categories foreach
+// } /// End of $categories foreach
 
 
 
@@ -122,17 +136,17 @@ echo '<div class="profileeditor">';
 /// Create a new field link
 $options = profile_list_datatypes();
 $popupurl = new moodle_url('/enrol/waitlist/profile/index.php?id=0&action=editfield');
-echo $OUTPUT->single_select($popupurl, 'datatype', $options, '', array(''=>$strcreatefield), 'newfieldform');
+echo $OUTPUT->single_select($popupurl, 'datatype', $options, '', array('' => $strcreatefield), 'newfieldform');
 
-//add a div with a class so themers can hide, style or reposition the text
-html_writer::start_tag('div',array('class'=>'adminuseractionhint'));
-//echo get_string('or', 'lesson');
+// add a div with a class so themers can hide, style or reposition the text
+html_writer::start_tag('div',array('class' => 'adminuseractionhint'));
+// echo get_string('or', 'lesson');
 html_writer::end_tag('div');
 
 
 /// Create a new category link
-//$options = array('action'=>'editcategory');
-//echo $OUTPUT->single_button(new moodle_url('index.php', $options), get_string('profilecreatecategory', 'local_course_fields'));
+// $options = array('action'=>'editcategory');
+// echo $OUTPUT->single_button(new moodle_url('index.php', $options), get_string('profilecreatecategory', 'local_course_fields'));
 echo '</div>';
 
 echo $OUTPUT->footer();
@@ -147,7 +161,7 @@ function profile_category_icons($category) {
     $stredit     = get_string('edit');
 
     $categorycount = $DB->count_records('user_info_category');
-    $fieldcount    = $DB->count_records('user_info_field', array('categoryid'=>$category->id));
+    $fieldcount    = $DB->count_records('user_info_field', array('categoryid' => $category->id));
 
     /// Edit
     $editstr = '<a title="'.$stredit.'" href="index.php?id='.$category->id.'&amp;action=editcategory"><img src="'.$OUTPUT->image_url('t/edit') . '" alt="'.$stredit.'" class="iconsmall" /></a> ';
@@ -160,7 +174,7 @@ function profile_category_icons($category) {
     } else {
         $editstr .= '<img src="'.$OUTPUT->image_url('spacer') . '" alt="" class="iconsmall" /> ';
     }
-	/*
+    /*
     /// Move up
     if ($category->sortorder > 1) {
         $editstr .= '<a title="'.$strmoveup.'" href="index.php?id='.$category->id.'&amp;action=movecategory&amp;dir=up&amp;sesskey='.sesskey().'"><img src="'.$OUTPUT->pix_url('t/up') . '" alt="'.$strmoveup.'" class="iconsmall" /></a> ';
@@ -174,7 +188,7 @@ function profile_category_icons($category) {
     } else {
         $editstr .= '<img src="'.$OUTPUT->pix_url('spacer') . '" alt="" class="iconsmall" /> ';
     }
-	*/
+    */
     return $editstr;
 }
 
@@ -193,7 +207,7 @@ function profile_field_icons($field) {
     $stredit     = get_string('edit');
 
     $fieldcount = $DB->count_records('waitlist_info_field');
-    $datacount  = $DB->count_records('waitlist_info_data', array('fieldid'=>$field->id));
+    $datacount  = $DB->count_records('waitlist_info_data', array('fieldid' => $field->id));
 
     /// Edit
     $editstr = '<a title="'.$stredit.'" href="index.php?id='.$field->id.'&amp;action=editfield"><img src="'.$OUTPUT->image_url('t/edit') . '" alt="'.$stredit.'" class="iconsmall" /></a> ';
@@ -205,7 +219,7 @@ function profile_field_icons($field) {
     /// Move up
     if ($field->sortorder > 1) {
         $editstr .= '<a title="'.$strmoveup.'" href="index.php?id='.$field->id.'&amp;action=movefield&amp;dir=up&amp;sesskey='.sesskey().'"><img src="'.$OUTPUT->image_url('t/up') . '" alt="'.$strmoveup.'" class="iconsmall" /></a> ';
-     } else {
+    } else {
         $editstr .= '<img src="'.$OUTPUT->image_url('spacer') . '" alt="" class="iconsmall" /> ';
     }
 
