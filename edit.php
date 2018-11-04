@@ -168,7 +168,7 @@ if ($mform->is_cancelled()) {
     foreach($data as $key => $val){
         if(substr($key,0,13) == 'custom_field_'){
             $shortname = str_replace(substr($key,0,13),'',$key);
-            $res = $DB->get_record("waitlist_info_field",array("shortname" => $shortname));
+            $res = $DB->get_record("waitlist_info_field", array("shortname" => $shortname));
 
             if($res){
                 $fields[$res->id] = $val;
