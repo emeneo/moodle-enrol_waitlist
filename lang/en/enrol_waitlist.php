@@ -108,3 +108,4 @@ $string['manage::define'] = "Define";
 $string['manage::assign'] = "Assign";
 $string['nocursefields'] = "No fields";
 $string['profilefield'] = "Field";
+$string['privacy:metadata'] = 'Enrol plugins do not store personal data directly.';
