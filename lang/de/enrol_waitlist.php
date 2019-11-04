@@ -116,3 +116,4 @@ $string['waitlist:unenrolself'] = 'Aus dem Kurs austragen';
 $string['lineinfo'] = '<br>Anzahl der Personen vor Ihnen auf der Warteliste: ';
 $string['lineconfirm'] = '<br>Sind Sie sicher, dass Sie fortfahren wollen?';
 
+$string['task:update_enrolments'] = 'Aktualisiere Wartelisteneinschreibungen';
