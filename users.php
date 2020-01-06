@@ -32,7 +32,7 @@ class waitlist_renderer extends core_enrol_renderer {
 
         $buttons = $table->get_manual_enrol_buttons();
         $buttonhtml = '';
-        if (count($buttons) > 0) {
+        if (count((array)$buttons) > 0) {
             $buttonhtml .= html_writer::start_tag('div', array('class' => 'enrol_user_buttons'));
             foreach ($buttons as $button) {
                 $buttonhtml .= $this->render($button);
