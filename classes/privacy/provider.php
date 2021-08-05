@@ -28,7 +28,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
     
     public static function get_contexts_for_userid(int $userid) : contextlist {
         $sql = "SELECT c.id
-                  FROM {enrol_waitlist} ew
+                  FROM {user_enrol_waitlist} ew
                   JOIN {context} c ON c.contextlevel = ? AND c.instanceid = ew.id
                  WHERE ew.userid = ?";
         $params = [CONTEXT_COURSE, $userid];
@@ -48,7 +48,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         // Values of ep.receiver_email and ep.business are already normalised to lowercase characters by PayPal,
         // therefore there is no need to use LOWER() on them in the following query.
         $sql = "SELECT u.id
-                  FROM {enrol_waitlist} ew
+                  FROM {user_enrol_waitlist} ew
                   JOIN {enrol} e ON ew.instanceid = e.id
                   JOIN {user} u ON ew.userid = u.id
                  WHERE e.courseid = :courseid";
@@ -70,7 +70,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         list($contextsql, $contextparams) = $DB->get_in_or_equal($contextlist->get_contextids(), SQL_PARAMS_NAMED);
         
         $sql = "SELECT ew.*
-                  FROM {enrol_waitlist} ew
+                  FROM {user_enrol_waitlist} ew
                   JOIN {enrol} e ON ew.instanceid = e.id
                   JOIN {context} ctx ON e.courseid = ctx.instanceid AND ctx.contextlevel = :contextcourse
                   JOIN {user} u ON u.id = ep.userid
