@@ -37,9 +37,10 @@ class enrol_waitlist_enrol_form extends moodleform {
         $this->instance = $instance;
         $plugin = enrol_get_plugin('waitlist');
 
+        $heading = $plugin->get_instance_name($instance);
+        $mform->addElement('header', 'waitlistheader', $heading);
+        
         if ($instance->password) {
-            $heading = $plugin->get_instance_name($instance);
-            $mform->addElement('header', 'waitlistheader', $heading);
             $mform->addElement('passwordunmask', 'enrolpassword', get_string('password', 'enrol_waitlist'));
         } else {
             // nothing?
