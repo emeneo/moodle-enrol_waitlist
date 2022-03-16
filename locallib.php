@@ -31,6 +31,21 @@ require_once("$CFG->libdir/formslib.php");
 class enrol_waitlist_enrol_form extends moodleform {
     protected $instance;
 
+    protected function get_form_identifier() {
+        $formid = $this->_customdata->id.'_'.get_class($this);
+        return $formid;
+    }
+
+    /**
+     * LEAFNET modification
+     * Create unique id
+     * @param $elementName
+     * @return string
+     */
+    protected function create_element_unique_id($elementName){
+        return 'id_'.$elementName.'_'.$this->_customdata->id;
+    }
+
     public function definition() {
         $mform = $this->_form;
         $instance = $this->_customdata;
@@ -39,8 +54,8 @@ class enrol_waitlist_enrol_form extends moodleform {
 
         if ($instance->password) {
             $heading = $plugin->get_instance_name($instance);
-            $mform->addElement('header', 'waitlistheader', $heading);
-            $mform->addElement('passwordunmask', 'enrolpassword', get_string('password', 'enrol_waitlist'));
+            $mform->addElement('header', 'waitlistheader', $heading, array('id'=>$this->create_element_unique_id('waitlistheader')));
+            $mform->addElement('passwordunmask', 'enrolpassword', get_string('password', 'enrol_waitlist'), array('id'=>$this->create_element_unique_id('enrolpassword')));
         } else {
             // nothing?
         }
@@ -93,8 +108,10 @@ class enrol_waitlist_enrol_form extends moodleform {
                   $mform->addElement('html', get_string('lineinfo', 'enrol_waitlist').$lineCount."<br>");
                   $mform->addElement('html', get_string('lineconfirm', 'enrol_waitlist'));
             }
-               // $this->add_action_buttons(false, get_string('confirmation_yes', 'enrol_waitlist'));
-               $mform->addElement("html","<br/><p align='center'><input type='submit' value='".get_string('confirmation_yes', 'enrol_waitlist')."' onclick='../../'>&nbsp;&nbsp;<input type='button' value='".get_string('confirmation_cancel', 'enrol_waitlist')."' onclick='window.history.go(-1)'></p>");
+
+            // $this->add_action_buttons(false, get_string('confirmation_yes', 'enrol_waitlist'));
+            $htmlElementForSubmit = "<div class='row' style='padding-top: 10px;padding-bottom: 10px'><div class='col-md-4 offset-md-3'><input type='submit' value='".get_string('enrolme', 'enrol_waitlist')."' onclick='../../'>&nbsp;&nbsp;<input type='button' value='".get_string('confirmation_cancel', 'enrol_waitlist')."' onclick='window.history.go(-1)'><br></div></div>";
+            $mform->addElement("html",$htmlElementForSubmit);
         }
 
         $mform->addElement('hidden', 'id');
