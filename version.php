@@ -25,7 +25,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2022031000;   // The current module version (Date: YYYYMMDDXX)
+$plugin->version  = 2022032500;   // The current module version (Date: YYYYMMDDXX)
 $plugin->requires = 2011033005;   // Requires at least this Moodle version
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 'Course Enrol Waitlist Plugin Version 3.9-b';
