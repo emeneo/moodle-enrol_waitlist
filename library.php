@@ -108,7 +108,6 @@ class course_enrolment_manager {
     /**#@+
      * These variables are used to cache the information this class uses
      * please never use these directly instead use their get_ counterparts.
-     * @access private
      * @var array
      */
     private $_instancessql = null;
