@@ -22,6 +22,7 @@
  * @copyright  2010 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once("$CFG->dirroot/user/lib.php");
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -223,7 +224,7 @@ class course_enrolment_manager {
      * @param int $perpage Defaults to 25
      * @return array
      */
-    public function get_users($sort, $direction='ASC', $page=0, $perpage=25,$instance) {
+    public function get_users($sort, $direction, $page, $perpage, $instance) {
         global $DB;
         if ($direction !== 'ASC') {
             $direction = 'DESC';
@@ -233,9 +234,13 @@ class course_enrolment_manager {
             list($instancessql, $params, $filter) = $this->get_instance_sql();
             list($filtersql, $moreparams) = $this->get_filter_sql();
             $params += $moreparams;
-            $extrafields = get_extra_user_fields($this->get_context());
-            $extrafields[] = 'lastaccess';
-            $ufields = user_picture::fields('u', $extrafields);
+            $fieldsapi = \core_user\fields::for_identity($this->get_context(), false);
+            $extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
+                        $extrafields[] = 'lastaccess';
+            //$ufields = user_picture::fields('u', $extrafields);
+            //$ufields = \core_user\fields::for_userpic($this->get_context())->get_sql('u', false, '', 'u.id');
+            $extrafields = array_unique(array_merge($extrafields, ['lastaccess', 'picture', 'firstname', 'lastname', 'firstnamephonetic', 'lastnamephonetic', 'middlename', 'alternatename', 'imagealt']));
+            $ufields = 'u.id, ' . implode(', ', $extrafields);
             $sql = "SELECT DISTINCT $ufields
                       FROM {user} u
                       JOIN {user_enrol_waitlist} ue ON (ue.userid = u.id  AND ue.instanceid = $instance)
@@ -265,8 +270,9 @@ class course_enrolment_manager {
         global $DB;
 
         // Search condition.
-        $extrafields = get_extra_user_fields($this->get_context());
-        list($sql, $params) = users_search_sql($this->searchfilter, 'u', true, $extrafields);
+        $fieldsapi = \core_user\fields::for_identity($this->get_context(), false);
+        $extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
+                list($sql, $params) = users_search_sql($this->searchfilter, 'u', true, $extrafields);
 
         // Role condition.
         if ($this->rolefilter) {
@@ -369,8 +375,9 @@ class course_enrolment_manager {
         $tests = array("u.id <> :guestid", 'u.deleted = 0', 'u.confirmed = 1');
         $params = array('guestid' => $CFG->siteguest);
         if (!empty($search)) {
-            $conditions = get_extra_user_fields($this->get_context());
-            $conditions[] = 'u.firstname';
+            $fieldsapi = \core_user\fields::for_identity($this->get_context(), false);
+            $extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
+                        $conditions[] = 'u.firstname';
             $conditions[] = 'u.lastname';
             $conditions[] = $DB->sql_fullname('u.firstname', 'u.lastname');
             if ($searchanywhere) {
@@ -388,10 +395,17 @@ class course_enrolment_manager {
         }
         $wherecondition = implode(' AND ', $tests);
 
-        $extrafields = get_extra_user_fields($this->get_context(), array('username', 'lastaccess'));
+        // big hack
+        $fieldsapi = \core_user\fields::for_identity($this->get_context(), false);
+        $additionalfields = ['username', 'lastaccess'];
+        $requiredfields = $fieldsapi->get_required_fields($additionalfields);
+        $extrafields = array_diff($requiredfields, ['id']);
         $extrafields[] = 'username';
         $extrafields[] = 'lastaccess';
-        $ufields = user_picture::fields('u', $extrafields);
+        //$ufields = user_picture::fields('u', $extrafields);
+        //$ufields = \core_user\fields::for_userpic($this->get_context())->get_sql('u', false, '', 'u.id');
+        $extrafields = array_unique(array_merge($extrafields, ['lastaccess', 'picture', 'firstname', 'lastname', 'firstnamephonetic', 'lastnamephonetic', 'middlename', 'alternatename', 'imagealt']));
+        $ufields = 'u.id, ' . implode(', ', $extrafields);
 
         return array($ufields, $params, $wherecondition);
     }
@@ -938,8 +952,9 @@ class course_enrolment_manager {
 
         $context    = $this->get_context();
         $now = time();
-        $extrafields = get_extra_user_fields($context);
-
+        $fieldsapi = \core_user\fields::for_identity($context, false);
+        $extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
+        
         $users = array();
         foreach ($userroles as $userrole) {
             $contextid = $userrole->contextid;
@@ -1016,8 +1031,9 @@ class course_enrolment_manager {
         $canmanagegroups = has_capability('moodle/course:managegroups', $context);
 
         $url = new moodle_url($pageurl, $this->get_url_params());
-        $extrafields = get_extra_user_fields($context);
-
+        $fieldsapi = \core_user\fields::for_identity($context, false);
+        $extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
+        
         $enabledplugins = $this->get_enrolment_plugins(true);
 
         $userdetails = array();
@@ -1087,7 +1103,7 @@ class course_enrolment_manager {
      * Please note that this function does not check capability for moodle/coures:viewhiddenuserfields
      *
      * @param object $user The user record
-     * @param array $extrafields The list of fields as returned from get_extra_user_fields used to determine which
+     * @param array $extrafields The list of fields as returned from get_required_fields used to determine which
      * additional fields may be displayed
      * @param int $now The time used for lastaccess calculation
      * @return array The fields to be displayed including userid, courseid, picture, firstname, lastseen and any
@@ -1178,7 +1194,10 @@ class course_enrolment_manager {
             list($instancesql, $instanceparams) = $DB->get_in_or_equal(array_keys($instances), SQL_PARAMS_NAMED, 'instanceid0000');
         }
 
-        $userfields = user_picture::fields('u');
+        //$ufields = user_picture::fields('u', $extrafields);
+        //$ufields = \core_user\fields::for_userpic($this->get_context())->get_sql('u', false, '', 'u.id');
+        $extrafields = array_unique(array_merge($extrafields, ['lastaccess', 'picture', 'firstname', 'lastname', 'firstnamephonetic', 'lastnamephonetic', 'middlename', 'alternatename', 'imagealt']));
+        $ufields = 'u.id, ' . implode(', ', $extrafields);
         list($idsql, $idparams) = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED, 'userid0000');
 
         list($sort, $sortparams) = users_order_by_sql('u');

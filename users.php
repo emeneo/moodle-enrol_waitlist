@@ -18,7 +18,7 @@ require('../../config.php');
 require_once("$CFG->dirroot/enrol/waitlist/library.php");
 require_once("$CFG->dirroot/enrol/waitlist/users_forms.php");
 require_once("$CFG->dirroot/enrol/renderer.php");
-
+require_once("$CFG->dirroot/user/lib.php");
 
 class waitlist_renderer extends core_enrol_renderer {
 
@@ -122,9 +122,12 @@ $userdetails = array (
     'firstname' => get_string('firstname'),
     'lastname' => get_string('lastname'),
 );
-$extrafields = get_extra_user_fields($context);
+$fieldsapi = \core_user\fields::for_identity($context, false);
+$extrafields = $fieldsapi->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);
 foreach ($extrafields as $field) {
-    $userdetails[$field] = get_user_field_name($field);
+    // $userdetails[$field] = get_user_field_name($field);
+    $userdetails[$field] = \core_user\fields::get_display_name($field);
+
 }
 
 $fields = array(
