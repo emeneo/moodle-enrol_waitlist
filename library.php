@@ -22,10 +22,10 @@
  * @copyright  2010 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once("$CFG->dirroot/user/lib.php");
+
 
 defined('MOODLE_INTERNAL') || die();
-
+require_once("$CFG->dirroot/user/lib.php");
 /**
  * This class provides a targeted tied together means of interfacing the enrolment
  * tasks together with a course.
