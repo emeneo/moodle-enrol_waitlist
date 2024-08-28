@@ -134,7 +134,9 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstounassign)) {
         foreach($userstounassign as $removeuser) {
             $enrol_manual->unenrol_user($instance, $removeuser->id);
-            add_to_log($course->id, 'course', 'unenrol', '../enrol/users.php?id='.$course->id, $course->id); // there should be userid somewhere!
+
+            // TODO: add logging using new events API
+            //           add_to_log($course->id, 'course', 'unenrol', '../enrol/users.php?id='.$course->id, $course->id); // there should be userid somewhere!
         }
 
         $potentialuserselector->invalidate_selected_users();
