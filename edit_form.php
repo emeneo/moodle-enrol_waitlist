@@ -217,8 +217,9 @@ class enrol_waitlist_edit_form extends moodleform {
         // custom fields
         global $DB, $CFG;
 
-        $fields = $DB->get_records('waitlist_info_field');
+        //$fields = $DB->get_records('waitlist_info_field');
         // echo "<pre>";print_r($fields);exit;
+        $fields = [];
         if(count($fields) > 0){
             $usedFields = $DB->get_records('waitlist_info_data', array('course_id' => $instance->courseid));
             $custom_data = array();

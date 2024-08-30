@@ -27,6 +27,12 @@ function xmldb_enrol_waitlist_upgrade($oldversion) {
         $sql = 'CREATE TABLE mdl_waitlist_info_data (id int(10) NOT NULL AUTO_INCREMENT,course_id int(10) NOT NULL,fieldid int(10) NOT NULL,data text NOT NULL,dataformat int(2) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8';
         $DB->execute($sql);
     }
-
+    /*
+    if ($result && $oldversion < 2024082801) {
+        $DB->execute('DROP TABLE IF EXISTS mdl_user_enrol_waitlist');
+        $DB->execute('DROP TABLE IF EXISTS mdl_waitlist_info_data');
+        $DB->execute('DROP TABLE IF EXISTS mdl_waitlist_info_field');
+    }
+    */
     return $result;
 }
