@@ -557,6 +557,31 @@ class enrol_waitlist_plugin extends enrol_plugin
             }
         }
     }
+
+    /**
+     * Updates enrol plugin instance with provided data.
+     * @param int $courseid Course ID.
+     * @param array $enrolmentdata enrolment data.
+     * @param stdClass $instance Instance to update.
+     *
+     * @return stdClass updated instance
+     */
+    public function update_enrol_plugin_data(int $courseid, array $enrolmentdata, stdClass $instance): stdClass {
+        if (!empty($enrolmentdata['password'])) {
+            $instance->password = $enrolmentdata['password'];
+        }
+        return parent::update_enrol_plugin_data($courseid, $enrolmentdata, $instance);
+    }
+
+    /**
+     * Check if enrolment plugin is supported in csv course upload.
+     *
+     * @return bool
+     */
+    public function is_csv_upload_supported(): bool {
+        return true;
+    }
+
 }
 
 /**
