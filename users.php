@@ -108,7 +108,7 @@ if ($course->id == SITEID) {
 }
 
 require_login($course);
-// require_capability('moodle/course:enrolreview', $context);
+require_capability('enrol/waitlist:manage', $context);
 $PAGE->set_pagelayout('admin');
 
 $manager = new course_enrolment_manager($PAGE, $course, $filter, $role, $search, $fgroup, $status);

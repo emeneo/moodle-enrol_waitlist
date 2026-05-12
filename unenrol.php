@@ -36,6 +36,14 @@ $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
 
 require_login($course);
 
+$context = context_course::instance($course->id);
+
+if ($USER->id == $userid) {
+    require_capability('enrol/waitlist:unenrolself', $context);
+} else {
+    require_capability('enrol/waitlist:unenrol', $context);
+}
+
 $plugin = enrol_get_plugin('waitlist');
 
 // security defined inside following function

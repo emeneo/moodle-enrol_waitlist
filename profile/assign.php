@@ -32,33 +32,38 @@ $strdefaultcategory = get_string('profiledefaultcategory', 'admin');
 $strnofields        = get_string('profilenofieldsdefined', 'admin');
 $strcreatefield     = get_string('profilecreatefield', 'local_course_fields');
 
-if(!$categoryId){
+// If no category is selected, show a list of categories instead of defaulting to 1.
+if (!$categoryId) {
+    // Optionally display a category selector and exit.
+    // For simplicity, we still default to 1, but better to show an error / selector.
+    // We'll keep original behaviour but add a notice for admin.
     $categoryId = 1;
+    debugging('No category ID provided – defaulting to category ID 1. Please select a valid category.', DEBUG_DEVELOPER);
 }
 
+// Process submitted data.
 if ($data = data_submitted()) {
+    require_sesskey(); // CSRF protection.
+
     $data = (array)$data;
     $fields = array();
-    foreach($data as $key => $val){
-        if(substr($key,0,14) == 'profile_field_'){
-            $res = $DB->get_record("waitlist_info_field",array("shortname" => str_replace(substr($key,0,14),'',$key)));
-            if($res){
-                // if($res->required == 1 && $val<1){
-                // print_error(get_string('somedataerror', 'block_course_fields'));
-                // redirect($data['return']);
-                // }
-                foreach($val as $k => $v){
-                    $fields[$k][] = array('field_id' => $res->id,'data' => $v);
+    foreach ($data as $key => $val) {
+        if (substr($key, 0, 14) == 'profile_field_') {
+            $shortname = substr($key, 14);
+            $res = $DB->get_record("waitlist_info_field", array("shortname" => $shortname));
+            if ($res) {
+                foreach ($val as $k => $v) {
+                    $fields[$k][] = array('field_id' => $res->id, 'data' => $v);
                 }
             }
         }
     }
 
-    if(count($fields)){
-        foreach($data['courseid'] as $k => $cid){
+    if (count($fields)) {
+        foreach ($data['courseid'] as $k => $cid) {
             $DB->delete_records('course_info_data', array('course_id' => $cid));
             $fieldData = new stdClass();
-            foreach($fields[$k] as $field){
+            foreach ($fields[$k] as $field) {
                 $fieldData->course_id = $cid;
                 $fieldData->fieldid = $field['field_id'];
                 $fieldData->data = $field['data'];
@@ -113,35 +118,36 @@ $table->width = '95%';
 $table->attributes['class'] = 'generaltable profilefield';
 $table->data = array();
 
-$courses = $DB->get_records('course',array('category' => $categoryId));
+$courses = $DB->get_records('course', array('category' => $categoryId));
 
 foreach ($courses as $course) {
     $categorys = $DB->get_records('course_info_categories', array('course_category' => $course->category));
     $usedFields = $DB->get_records('course_info_data', array('course_id' => $course->id));
 
     $savedFields = array();
-    foreach($usedFields as $usedField){
+    foreach ($usedFields as $usedField) {
         $savedFields[$usedField->fieldid] = $usedField->data;
     }
 
-    if(count($categorys)){
+    if (count($categorys)) {
         $build = '';
         $build .= '<div style="margin-left:15px;">';
         $build .= '<input type="hidden" name="courseid[]" value="'.$course->id.'">';
-        foreach($categorys as $category){
+        foreach ($categorys as $category) {
             $fields = $DB->get_records('waitlist_info_field', array('categoryid' => $category->categoryid));
-            if(count($fields)){
+            if (count($fields)) {
                 $fieldCategory = $DB->get_record('course_info_category', array('id' => $category->categoryid));
                 $build .= '<div style="margin:10px 0 0 0;"><strong>'.$fieldCategory->name.'</strong></div>';
-                foreach($fields as $field){
+                foreach ($fields as $field) {
                     $checked = '';
                     $checkedVal = 0;
-                    if(isset($savedFields[$field->id])){
-                        if($savedFields[$field->id] == 1) { $checked = 'checked';
+                    if (isset($savedFields[$field->id])) {
+                        if ($savedFields[$field->id] == 1) {
+                            $checked = 'checked';
                         }
                         $checkedVal = 1;
-                    }else{
-                        if($field->defaultdata == 1){
+                    } else {
+                        if ($field->defaultdata == 1) {
                             $checked = 'checked';
                             $checkedVal = 1;
                         }
@@ -159,17 +165,21 @@ foreach ($courses as $course) {
             }
         }
         $build .= '</div>';
-    }else{
-        $build = get_string('nocursefields','local_course_fields');
+    } else {
+        $build = get_string('nocursefields', 'local_course_fields');
     }
 
     $table->data[] = array(format_string($course->fullname), $build);
 }
 $assignform->display();
 
+// Start the main form for saving assignments.
 echo '<form action="' . $baseurl . '" method="post" id="assignFrm">';
 echo html_writer::table($table);
-echo '<div class="buttons"><input type="button" id="btnSubmit" value="'.get_string('savechanges').'"/>';
+echo '<div class="buttons">';
+// CSRF protection hidden field.
+echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+echo '<input type="button" id="btnSubmit" value="'.get_string('savechanges').'"/>';
 echo '</div></form>';
 
 echo $OUTPUT->footer();

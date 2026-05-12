@@ -14,31 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-$data['ESB'] = array('AUS', 'AW', 'DEV', 'DV3', 'DV4', 'EMS', 'ESA', 'ESE', 'ESF', 'ESG', 'ESI', 'ESM', 'ESN', 'ESP', 'ESS', 'IBU', 'ILM', 'IM', 'IMP', 'LOG', 'MIM', 'OM', 'PM', 'PRM', 'PRO');
-$data['INF'] = array('HUC', 'MTI', 'MUK', 'SC', 'WI', 'WIN');
-$data['TD'] = array('DES', 'IFR', 'TB', 'TE', 'TID', 'TM', 'TT');
+/**
+ * AJAX endpoint to retrieve code lists based on a category parameter.
+ *
+ * @package    enrol_waitlist
+ * @copyright  2024 emeneo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-$param = optional_param('q', 0, PARAM_TEXT);
+require('../../config.php');
+
+require_login();
+
+require_capability('enrol/waitlist:manage', context_system::instance());
+
+$data = [
+    'ESB' => ['AUS', 'AW', 'DEV', 'DV3', 'DV4', 'EMS', 'ESA', 'ESE', 'ESF', 'ESG', 'ESI', 'ESM', 'ESN', 'ESP', 'ESS', 'IBU', 'ILM', 'IM', 'IMP', 'LOG', 'MIM', 'OM', 'PM', 'PRM', 'PRO'],
+    'INF' => ['HUC', 'MTI', 'MUK', 'SC', 'WI', 'WIN'],
+    'TD'  => ['DES', 'IFR', 'TB', 'TE', 'TID', 'TM', 'TT'],
+];
+
+$param = optional_param('q', '', PARAM_TEXT);
 $query = strtoupper($param);
-$res = $data[$query];
 
-echo json_encode($res);
+$result = isset($data[$query]) ? $data[$query] : [];
 
+// Set JSON content type header.
+header('Content-Type: application/json; charset=utf-8');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Output the JSON-encoded result.
+echo json_encode($result);

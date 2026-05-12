@@ -37,9 +37,7 @@ $course = $DB->get_record('course', array('id' => $instance->courseid), '*', MUS
 $context = context_course::instance($course->id);
 
 require_login($course);
-// require_capability('enrol/manual:enrol', $context);
-// require_capability('enrol/manual:manage', $context);
-// require_capability('enrol/manual:unenrol', $context);
+require_capability('enrol/waitlist:manage', $context);
 
 if ($roleid < 0) {
     $roleid = $instance->roleid;
